@@ -1,4 +1,4 @@
-package com.ynov.fantasy_war.services;
+package com.ynov.fantasy_war.services.aventurier;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierPayload;
 

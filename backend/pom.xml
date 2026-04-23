@@ -31,6 +31,10 @@
 		<swagger-annotations.version>2.2.36</swagger-annotations.version>
 		<jackson-databind-nullable.version>0.2.7</jackson-databind-nullable.version>
 
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+
+
 		<openapi-generator.version>7.15.0</openapi-generator.version>
 		<openapi-generator.rootPackage>${root-package}.infrastructure.web.openapi</openapi-generator.rootPackage>
 		<openapi-generator.apiPackage>${openapi-generator.rootPackage}.api</openapi-generator.apiPackage>
@@ -85,7 +89,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+			<scope>provided</scope>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -155,6 +159,21 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<release>25</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.40</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

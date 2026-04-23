@@ -11,7 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(
         name = "aventuriers",
@@ -32,9 +36,11 @@ public class AventurierEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private ClasseEntity classe;
+    @Column(nullable = false)
+    private int physique;
+    @Column(nullable = false)
+    private int mental;
+    @Column(nullable = false)
+    private int perception;
 
-    // etc.
-    protected AventurierEntity() {
-    } // requis par JPA
-    // getters/setters
 }

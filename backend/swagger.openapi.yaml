@@ -153,6 +153,7 @@ paths:
       operationId: deconnexion
       responses:
         '200':
+          description: Logout successful
 
 components:
   schemas:
