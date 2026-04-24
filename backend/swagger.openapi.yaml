@@ -27,6 +27,7 @@ paths:
     post:
       tags: [Auth]
       summary: Inscription utilisateur (PUBLIC)
+      operationId: inscription
       requestBody:
         required: true
         content:
@@ -41,6 +42,7 @@ paths:
     post:
       tags: [Auth]
       summary: Connexion utilisateur (PUBLIC)
+      operationId: connexion
       requestBody:
         required: true
         content:
@@ -59,13 +61,12 @@ paths:
     post:
       tags: [Auth]
       summary: Déconnexion (AUTHENTIFIÉ)
+      operationId: deconnexion
       security:
         - bearerAuth: []
       responses:
         '204':
           description: Déconnecté
-        '401':
-          $ref: '#/components/responses/Unauthorized'
 
   ########################
   # AVENTURIERS
@@ -74,35 +75,24 @@ paths:
   /api/v1/aventuriers:
     get:
       tags: [Aventuriers]
-      summary: Lister les aventuriers (VIEWER, ADMIN)
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: query
-          name: page
-          schema:
-            type: integer
-        - in: query
-          name: size
-          schema:
-            type: integer
+      summary: Lister tous les aventuriers
+      operationId: listerAventuriers
       responses:
         '200':
-          description: Liste paginée
+          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AventurierDto'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ErreurServeur'
 
     post:
       tags: [Aventuriers]
-      summary: Créer un aventurier (ADMIN)
-      security:
-        - bearerAuth: []
+      summary: Créer un aventurier
+      operationId: creerAventurier
       requestBody:
         required: true
         content:
@@ -117,7 +107,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/AventurierDto'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/RequeteInvalide'
+        '500':
+          $ref: '#/components/responses/ErreurServeur'
 
   /api/v1/aventuriers/{id}:
     parameters:
@@ -130,9 +122,8 @@ paths:
 
     get:
       tags: [Aventuriers]
-      summary: Consulter un aventurier (VIEWER, ADMIN)
-      security:
-        - bearerAuth: []
+      summary: Consulter un aventurier
+      operationId: obtenirAventurier
       responses:
         '200':
           description: OK
@@ -141,13 +132,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/AventurierDto'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NonTrouve'
+        '500':
+          $ref: '#/components/responses/ErreurServeur'
 
     put:
       tags: [Aventuriers]
-      summary: Modifier un aventurier (ADMIN)
-      security:
-        - bearerAuth: []
+      summary: Modifier un aventurier
+      operationId: modifierAventurier
       requestBody:
         required: true
         content:
@@ -157,26 +149,38 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AventurierDto'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/RequeteInvalide'
+        '404':
+          $ref: '#/components/responses/NonTrouve'
+        '500':
+          $ref: '#/components/responses/ErreurServeur'
 
     delete:
       tags: [Aventuriers]
-      summary: Supprimer un aventurier (ADMIN)
-      security:
-        - bearerAuth: []
+      summary: Supprimer un aventurier
+      operationId: supprimerAventurier
       responses:
         '204':
           description: Supprimé
+        '404':
+          $ref: '#/components/responses/NonTrouve'
+        '500':
+          $ref: '#/components/responses/ErreurServeur'
 
   ########################
-  # COMPETENCES (F1-F5)
+  # COMPETENCES
   ########################
 
   /api/v1/competences:
     get:
       tags: [Competences]
-      summary: Lister les compétences (VIEWER, ADMIN)
+      summary: Lister les compétences
+      operationId: listerCompetences
       security:
         - bearerAuth: []
       responses:
@@ -185,20 +189,13 @@ paths:
 
     post:
       tags: [Competences]
-      summary: Créer une compétence (ADMIN)
+      summary: Créer une compétence
+      operationId: creerCompetence
       security:
         - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Competence'
       responses:
         '201':
           description: Créée
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
 
   /api/v1/competences/{id}:
     parameters:
@@ -211,7 +208,8 @@ paths:
 
     get:
       tags: [Competences]
-      summary: Détail compétence (VIEWER, ADMIN)
+      summary: Détail compétence
+      operationId: obtenirCompetence
       security:
         - bearerAuth: []
       responses:
@@ -220,34 +218,40 @@ paths:
 
     put:
       tags: [Competences]
-      summary: Modifier compétence (ADMIN)
+      summary: Modifier compétence
+      operationId: modifierCompetence
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Modifiée
-        '409':
-          $ref: '#/components/responses/Conflict'
 
     delete:
       tags: [Competences]
-      summary: Supprimer compétence (ADMIN)
+      summary: Supprimer compétence
+      operationId: supprimerCompetence
       security:
         - bearerAuth: []
       responses:
         '204':
           description: Supprimée
-        '409':
-          $ref: '#/components/responses/Conflict'
 
   ########################
-  # ASSOCIATION (F6-F8)
+  # ASSOCIATION
   ########################
 
   /api/v1/aventuriers/{id}/competences:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
     get:
       tags: [Competences]
-      summary: Compétences d’un aventurier (VIEWER, ADMIN)
+      summary: Compétences d’un aventurier
+      operationId: listerCompetencesAventurier
       security:
         - bearerAuth: []
       responses:
@@ -255,36 +259,55 @@ paths:
           description: Liste
 
   /api/v1/aventuriers/{id}/competences/{cId}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
     post:
       tags: [Competences]
-      summary: Ajouter compétence (ADMIN)
+      summary: Ajouter compétence
+      operationId: ajouterCompetenceAventurier
       security:
         - bearerAuth: []
       responses:
         '204':
           description: Ajoutée
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
 
     delete:
       tags: [Competences]
-      summary: Retirer compétence (ADMIN)
+      summary: Retirer compétence
+      operationId: retirerCompetenceAventurier
       security:
         - bearerAuth: []
       responses:
         '204':
           description: Retirée
-        '409':
-          $ref: '#/components/responses/Conflict'
 
   ########################
-  # VUES (F9-F10)
+  # VUES
   ########################
 
   /api/v1/aventuriers/{id}/competences/disponibles:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
     get:
       tags: [Competences]
-      summary: Compétences disponibles/bloquées (VIEWER, ADMIN)
+      summary: Compétences disponibles/bloquées
+      operationId: obtenirCompetencesDisponibles
       security:
         - bearerAuth: []
       responses:
@@ -292,9 +315,17 @@ paths:
           description: OK
 
   /api/v1/competences/{id}/aventuriers:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
     get:
       tags: [Competences]
-      summary: Aventuriers liés (VIEWER, ADMIN)
+      summary: Aventuriers liés
+      operationId: listerAventuriersParCompetence
       security:
         - bearerAuth: []
       responses:
@@ -331,18 +362,28 @@ components:
       properties:
         nom:
           type: string
+          minLength: 3
         description:
-          type: string
+            type: string
         physique:
-          type: integer
+            type: integer
+            minimum: 1
+            maximum: 50
         mental:
-          type: integer
+            type: integer
+            minimum: 1
+            maximum: 50
         perception:
-          type: integer
+            type: integer
+            minimum: 1
+            maximum: 50
         niveau:
-          type: integer
+            type: integer
+            minimum: 1
+            maximum: 100
         classe:
           type: string
+          enum: [GUERRIER, MAGE, RODEUR, VOLEUR, CLERC, BARDE, DRUIDE, PALADIN, BARBARE, MOINE]
 
     AventurierDto:
       allOf:
@@ -392,8 +433,34 @@ components:
           type: array
           items:
             type: object
+    Erreur:
+      type: object
+      required: [ statut, message ]
+      properties:
+        statut:
+          type: integer
+        message:
+          type: string
 
   responses:
+    RequeteInvalide:
+      description: Requête invalide
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erreur'
+    NonTrouve:
+      description: Ressource introuvable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erreur'
+    ErreurServeur:
+      description: Erreur serveur
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erreur'
 
     Unauthorized:
       description: Non authentifié
