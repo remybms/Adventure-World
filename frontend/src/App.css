@@ -1,0 +1,13 @@
+.card{
+  padding: 1rem;
+  background-color: gray;
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 1rem;
+}
