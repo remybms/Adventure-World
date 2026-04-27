@@ -11,7 +11,7 @@ function App() {
         const fetchData = async () => {
             try {
                 const response = await apiClient.get(`/api/v1/aventuriers`)
-                if (response.status < 200 || response.status > 299) {
+                if (response.status != 200) {
                     throw new Error(`Response status: ${response.status}`);
                 }
                 const data = await response.data

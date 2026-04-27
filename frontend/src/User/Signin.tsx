@@ -1,23 +1,23 @@
 import { useState } from "react"
 import apiClient from "../../AuthContext/apiClient"
 
-export default function Login() {
+export default function Signin() {
 
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
 
-    const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const sendData = async () => {
         try {
-            const response = await apiClient.post("/auth/login", {
+            const response = await apiClient.post("/auth/register", {
                 username: username,
                 password: password,
+                role: "VIEWER"
             })
-            if (response.status != 200) {
+            if (response.status != 201) {
                 throw new Error(`Response status : ${response.status}`)
             }
             const data = await response.data
-            localStorage.setItem("token", data.token)
+            console.log(data)
         } catch (error) {
             console.log(error)
         }

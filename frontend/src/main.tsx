@@ -7,6 +7,8 @@ import { PrivateRoute } from '../AuthContext/PrivateRoutes'
 import Adventurer from './Adventurer/Adventurer.tsx'
 import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
 import Login from './User/Login.tsx'
+import Signin from './User/Signin.tsx'
+import { AuthProvider } from '../AuthContext/AuthProvider.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,13 +18,13 @@ const router = createBrowserRouter(
       <Route
         path="/create-adventurer"
         element={
-          <PrivateRoute requiredRole="ADMIN">
+          <PrivateRoute requiredRole="ADMIN FACTOR_PASSWORD">
             <CreateAdventurer />
           </PrivateRoute>
         }
       />
-      <Route path='/login' element={<Login />}/>
-
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Signin />} />
     </>
 
   )
@@ -30,6 +32,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
