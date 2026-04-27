@@ -30,9 +30,9 @@ public class AppUser {
     private String role; // ex: "ROLE_USER"
 
 
-    /*protected AppUser() {
+    protected AppUser() {
         // JPA only
-    }*/
+    }
 
 
     public AppUser(String username, String passwordHash, String role) {
