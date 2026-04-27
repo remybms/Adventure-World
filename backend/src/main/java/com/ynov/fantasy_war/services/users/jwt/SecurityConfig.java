@@ -60,6 +60,8 @@ public class SecurityConfig {
                         // Endpoints publics
                         .requestMatchers("/auth/**").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/**").permitAll()
+
                         // Préflight CORS (le navigateur envoie OPTIONS avant certaines requêtes)
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
