@@ -9,6 +9,7 @@ import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
 import Login from './User/Login.tsx'
 import Signin from './User/Signin.tsx'
 import { AuthProvider } from '../AuthContext/AuthProvider.tsx'
+import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,8 +19,16 @@ const router = createBrowserRouter(
       <Route
         path="/create-adventurer"
         element={
-          <PrivateRoute requiredRole="ADMIN FACTOR_PASSWORD">
+          <PrivateRoute requiredRole="ADMIN">
             <CreateAdventurer />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/update-adventurer"
+        element={
+          <PrivateRoute requiredRole="ADMIN">
+            <UpdateAdventurer />
           </PrivateRoute>
         }
       />

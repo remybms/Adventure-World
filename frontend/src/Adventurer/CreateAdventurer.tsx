@@ -1,5 +1,6 @@
 import { useState } from "react"
 import apiClient from "../../AuthContext/apiClient"
+import { useNavigate } from "react-router-dom"
 
 export default function CreateAdventurer() {
 
@@ -10,18 +11,23 @@ export default function CreateAdventurer() {
     const [physique, setPhysique] = useState<string>()
     const [mental, setMental] = useState<string>()
 
-    const sendData = async () => {
+    const navigate = useNavigate()
+
+    const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         try{
-            const response = await apiClient.post("/api/v1/aventurier", {
-                name: name,
+            const response = await apiClient.post("/api/v1/aventuriers", {
+                nom: name,
                 classe: classe,
                 description: description,
                 perception: perception,
                 physique: physique,
-                mental: mental
+                mental: mental,
+                niveau: 1
             })
             const data = await response.data
             console.log(data)
+            navigate("/")
         } catch (e){
             console.log(e)
         }

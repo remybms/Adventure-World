@@ -1,12 +1,16 @@
 import { useState } from "react"
 import apiClient from "../../AuthContext/apiClient"
+import { useNavigate } from "react-router-dom"
 
 export default function Signin() {
 
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
 
-    const sendData = async () => {
+    const navigate = useNavigate()
+
+    const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         try {
             const response = await apiClient.post("/auth/register", {
                 username: username,
@@ -18,6 +22,7 @@ export default function Signin() {
             }
             const data = await response.data
             console.log(data)
+            navigate('/login')
         } catch (error) {
             console.log(error)
         }

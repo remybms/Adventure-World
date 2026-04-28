@@ -1,10 +1,13 @@
 import { useState } from "react"
 import apiClient from "../../AuthContext/apiClient"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
 
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
+
+    const navigate = useNavigate();
 
     const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -18,6 +21,7 @@ export default function Login() {
             }
             const data = await response.data
             localStorage.setItem("token", data.token)
+            navigate('/')
         } catch (error) {
             console.log(error)
         }

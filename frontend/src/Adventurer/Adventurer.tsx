@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 export default function Adventurer() {
 
     const [searchedAdventurer, setSearchedAdventurer] = useState<AdventurerType>()
+    const [error, setError] = useState<unknown>()
 
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
@@ -21,7 +22,7 @@ export default function Adventurer() {
                 const data = await response.data
                 setSearchedAdventurer(data)
             } catch (error) {
-                console.log(error)
+                setError(error)
             }
         }
 
@@ -34,6 +35,10 @@ export default function Adventurer() {
 
     if (!searchedAdventurer) {
         return <div>Loading...</div>
+    }
+
+    if (error){
+        return <div>{String(error)}</div>
     }
 
     return (
