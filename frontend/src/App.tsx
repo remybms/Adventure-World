@@ -12,6 +12,8 @@ function App() {
   const token = localStorage.getItem("token")
   const isAdmin = token ? jwtDecode<CustomJwtPayload>(token).scope.includes("ADMIN") : false;
 
+
+
   const deleteAdventurer = async (idAdventurer: string) => {
     try {
       const response = await apiClient.delete(`/api/v1/aventuriers/${idAdventurer}`)
@@ -20,24 +22,26 @@ function App() {
       }
       const data = await response.data
       console.log(data)
+      fetchData()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const fetchData = async () => {
+    try {
+      const response = await apiClient.get(`/api/v1/aventuriers`)
+      if (response.status != 200) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const data = await response.data
+      setAdventurers(data)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiClient.get(`/api/v1/aventuriers`)
-        if (response.status != 200) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.data
-        setAdventurers(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
     fetchData()
   }, [])
 

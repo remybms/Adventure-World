@@ -13,6 +13,7 @@ export default function Header() {
     const disconnect = () => {
         localStorage.removeItem("token")
         navigate('/')
+        window.location.reload()
     }
 
     return (
