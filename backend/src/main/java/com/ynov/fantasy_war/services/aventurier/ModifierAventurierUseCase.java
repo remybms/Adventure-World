@@ -24,6 +24,20 @@ public class ModifierAventurierUseCase {
                 .orElseThrow(() -> new NotFoundException("Aventurier", id));
 
         aventurierDomain.checkNiveauModification(aventurier.getNiveau(), aventurierPayload.getNiveau()) ;
+        aventurier.setNom(aventurierPayload.getNom());
+        aventurier.setDescription(aventurierPayload.getDescription());
+        aventurier.setNiveau(aventurierPayload.getNiveau());
+        aventurier.setPhysique(aventurierPayload.getPhysique());
+        aventurier.setMental(aventurierPayload.getMental());
+        aventurier.setPerception(aventurierPayload.getPerception());
+
+        if (aventurierPayload.getClasse() != null) {
+            AventurierPayload.ClasseEnum classe = aventurierPayload.getClasse();
+            ClasseEntity classeEntity = ClasseEntity.valueOf(classe.name());
+            aventurier.setClasse(classeEntity);
+        }
+
+        aventurierRepository.save(aventurier);
         AventurierDto aventurierDto = new AventurierDto();
         aventurierDto.setNom(aventurier.getNom());
         aventurierDto.setDescription(aventurier.getDescription());
