@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import apiClient from "../../AuthContext/apiClient"
-import { useSearchParams } from "react-router-dom"
-import type AdventurerType from "../AdventurerType"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import type { AdventurerType } from "../AdventurerType"
 
 export default function UpdateAdventurer() {
 
@@ -14,6 +14,8 @@ export default function UpdateAdventurer() {
     const [niveau, setNiveau] = useState<number>()
     const [searchedAdventurer, setSearchedAdventurer] = useState<AdventurerType>()
     const [error, setError] = useState<unknown>()
+
+    const navigate = useNavigate()
 
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
@@ -32,6 +34,7 @@ export default function UpdateAdventurer() {
             })
             const data = await response.data
             console.log(data)
+            navigate("/")
         } catch (e) {
             console.log(e)
         }

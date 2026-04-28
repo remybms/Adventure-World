@@ -1,4 +1,6 @@
-export default interface AdventurerType {
+import type { JwtPayload } from "jwt-decode"
+
+export interface AdventurerType {
     id: string,
     nom: string,
     classe: string,
@@ -7,4 +9,8 @@ export default interface AdventurerType {
     physique: number,
     mental: number,
     niveau: number
+}
+
+export interface CustomJwtPayload extends JwtPayload {
+  scope: string
 }

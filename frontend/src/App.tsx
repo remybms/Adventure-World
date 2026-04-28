@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import apiClient from '../AuthContext/apiClient'
-import type AdventurerType from './AdventurerType'
-import { jwtDecode, type JwtPayload } from 'jwt-decode'
-
-interface CustomJwtPayload extends JwtPayload {
-  scope: string
-}
+import type { AdventurerType, CustomJwtPayload } from './AdventurerType'
+import { jwtDecode } from 'jwt-decode'
+import Header from './Header'
 
 function App() {
 
@@ -50,19 +47,25 @@ function App() {
 
   return (
     <>
-      <h1>Adventure World</h1>
-      {adventurers.map((adventurer) => (
-        <a href={`/aventurier?id=${adventurer.id}`} className='card'>
-          {isAdmin && (
-            <>
-              <button onClick={() => deleteAdventurer(adventurer.id)}>Supprimer</button>
-              <a href={`/update-adventurer?id=${adventurer.id}`}>Modifier</a>
-            </>
-          )}
-          <h2>{adventurer.nom}</h2>
-          <p>{adventurer.description}</p>
-        </a>
-      ))}
+      <Header />
+      <div className='content'>
+        <h1>Adventure World</h1>
+        {adventurers.map((adventurer) => (
+          <div className='card'>
+            {isAdmin &&
+              <div className='adminButtons'>
+                <button onClick={() => deleteAdventurer(adventurer.id)}>Supprimer</button>
+                <a href={`/update-adventurer?id=${adventurer.id}`}>Modifier</a>
+              </div>
+            }
+            <a href={`/aventurier?id=${adventurer.id}`}>
+              <h2>{adventurer.nom}</h2>
+              <p>{adventurer.description}</p>
+            </a>
+          </div>
+        ))}
+      </div>
+
     </>
   )
 }

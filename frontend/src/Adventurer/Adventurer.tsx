@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import apiClient from "../../AuthContext/apiClient"
-import type AdventurerType from "../AdventurerType"
+import type { AdventurerType } from "../AdventurerType"
 import { useSearchParams } from "react-router-dom";
 
 
