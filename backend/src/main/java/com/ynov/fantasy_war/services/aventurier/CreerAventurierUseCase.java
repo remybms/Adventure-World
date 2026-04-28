@@ -34,7 +34,7 @@ public class CreerAventurierUseCase {
         aventurier.setNiveau(1);
         aventurier.setMental(aventurierDto.getMental());
         aventurier.setPerception(aventurierDto.getPerception());
-        aventurierDto.setPhysique(aventurierDto.getPhysique());
+        aventurier.setPhysique(aventurierDto.getPhysique());
         aventurierRepository.save(aventurier);
         AventurierDto aventurierResult = new AventurierDto();
         aventurierResult.setId(aventurier.getId());
