@@ -1,4 +1,6 @@
-package com.ynov.fantasy_war.domain;
+package com.ynov.fantasy_war.domain.aventurier;
+
+import com.ynov.fantasy_war.domain.RequeteInvalideException;
 
 public class IllegalNiveauCreationException extends RequeteInvalideException {
     public IllegalNiveauCreationException(int niveau) {
