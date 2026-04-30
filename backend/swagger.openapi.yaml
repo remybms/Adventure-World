@@ -282,7 +282,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AventurierDto'
+                  $ref: '#/components/schemas/Competence'
 
   /api/v1/aventuriers/{id}/competences/{cId}:
     parameters:
@@ -344,7 +344,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AventurierDto'
+                  $ref: '#/components/schemas/Competence'
 
   /api/v1/competences/{id}/aventuriers:
     parameters:
