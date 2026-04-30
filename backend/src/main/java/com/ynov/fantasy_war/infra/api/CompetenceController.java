@@ -2,18 +2,29 @@ package com.ynov.fantasy_war.infra.api;
 
 import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
-import com.ynov.fantasy_war.services.competences.CreerCompetenceUseCase;
+import com.ynov.fantasy_war.services.competences.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
+@RestController
 public class CompetenceController implements CompetencesApi {
 
     private final CreerCompetenceUseCase creerCompetenceUseCase;
+    private final ListerCompetencesUseCase listerCompetencesUseCase;
+    private final CompetenceParIdUseCase competenceParIdUseCase;
+    private final EditCompetenceUseCase editCompetenceUseCase;
+    private final DeleteCompetenceUseCase deleteCompetenceUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase){
         this.creerCompetenceUseCase = creerCompetenceUseCase;
+        this.listerCompetencesUseCase = listerCompetencesUseCase;
+        this.competenceParIdUseCase = competenceParIdUseCase;
+        this.editCompetenceUseCase = editCompetenceUseCase;
+        this.deleteCompetenceUseCase = deleteCompetenceUseCase;
     }
 
     @Override
@@ -33,7 +44,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public List<Competence> listerCompetences(){
-
+        return listerCompetencesUseCase.execute();
     }
 
     @Override
@@ -42,13 +53,13 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public void modifierCompetence(UUID id) {
-
+    public void modifierCompetence(UUID id, Competence competence) {
+        editCompetenceUseCase.execute(id, competence);
     }
 
     @Override
     public Competence obtenirCompetence(UUID id) {
-
+        return competenceParIdUseCase.execute(id);
     }
 
     @Override
@@ -63,6 +74,6 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public void supprimerCompetence(UUID id) {
-
+        deleteCompetenceUseCase.execute(id);
     }
 }
