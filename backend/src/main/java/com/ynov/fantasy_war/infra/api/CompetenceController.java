@@ -1,10 +1,20 @@
 package com.ynov.fantasy_war.infra.api;
 
 import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
+import com.ynov.fantasy_war.services.competences.CreerCompetenceUseCase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CompetenceController implements CompetencesApi {
+
+    private final CreerCompetenceUseCase creerCompetenceUseCase;
+
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase){
+        this.creerCompetenceUseCase = creerCompetenceUseCase;
+    }
 
     @Override
     public void ajouterCompetenceAventurier(UUID aventurier, UUID competence){
@@ -12,8 +22,8 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public void creerCompetence(){
-
+    public Competence creerCompetence(Competence competence){
+        return creerCompetenceUseCase.execute(competence);
     }
 
     @Override
@@ -22,12 +32,12 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public void listerCompetences(){
+    public List<Competence> listerCompetences(){
 
     }
 
     @Override
-    public void listerCompetencesAventurier(UUID aventurier){
+    public List<Competence> listerCompetencesAventurier(UUID aventurier){
 
     }
 
@@ -37,12 +47,12 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public void obtenirCompetence(UUID id) {
+    public Competence obtenirCompetence(UUID id) {
 
     }
 
     @Override
-    public void obtenirCompetencesDisponibles(UUID id) {
+    public List<Competence> obtenirCompetencesDisponibles(UUID id) {
 
     }
 
