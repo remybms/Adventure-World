@@ -240,6 +240,12 @@ paths:
       tags: [Competences]
       summary: Modifier compétence
       operationId: modifierCompetence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Competence'
       security:
         - bearerAuth: []
       responses:
