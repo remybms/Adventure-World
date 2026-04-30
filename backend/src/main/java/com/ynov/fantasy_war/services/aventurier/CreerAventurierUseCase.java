@@ -1,6 +1,6 @@
 package com.ynov.fantasy_war.services.aventurier;
 
-import com.ynov.fantasy_war.domain.AventurierDomain;
+import com.ynov.fantasy_war.domain.aventurier.AventurierDomain;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.entity.AventurierEntity;
 import com.ynov.fantasy_war.infra.bdd.entity.ClasseEntity;
