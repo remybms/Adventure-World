@@ -1,4 +1,4 @@
-package com.ynov.fantasy_war.domain;
+package com.ynov.fantasy_war.domain.aventurier;
 
 import org.springframework.stereotype.Component;
 

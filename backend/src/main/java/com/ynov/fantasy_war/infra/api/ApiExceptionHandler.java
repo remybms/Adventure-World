@@ -1,7 +1,5 @@
 package com.ynov.fantasy_war.infra.api;
 
-import com.ynov.fantasy_war.domain.IllegalNiveauCreationException;
-import com.ynov.fantasy_war.domain.IllegalNiveauModificationException;
 import com.ynov.fantasy_war.domain.NotFoundException;
 import com.ynov.fantasy_war.domain.RequeteInvalideException;
 import lombok.extern.slf4j.Slf4j;

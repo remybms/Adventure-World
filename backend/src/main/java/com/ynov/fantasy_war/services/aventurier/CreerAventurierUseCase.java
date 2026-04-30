@@ -1,6 +1,6 @@
 package com.ynov.fantasy_war.services.aventurier;
 
-import com.ynov.fantasy_war.domain.AventurierDomain;
+import com.ynov.fantasy_war.domain.aventurier.AventurierDomain;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.entity.AventurierEntity;
 import com.ynov.fantasy_war.infra.bdd.entity.ClasseEntity;
@@ -34,7 +34,7 @@ public class CreerAventurierUseCase {
         aventurier.setNiveau(1);
         aventurier.setMental(aventurierDto.getMental());
         aventurier.setPerception(aventurierDto.getPerception());
-        aventurierDto.setPhysique(aventurierDto.getPhysique());
+        aventurier.setPhysique(aventurierDto.getPhysique());
         aventurierRepository.save(aventurier);
         AventurierDto aventurierResult = new AventurierDto();
         aventurierResult.setId(aventurier.getId());

@@ -1,4 +1,4 @@
-package com.ynov.fantasy_war.domain;
+package com.ynov.fantasy_war.domain.aventurier;
 
 public class IllegalNiveauModificationException extends RuntimeException {
     public IllegalNiveauModificationException(int niveauActuel, int niveauCible) {

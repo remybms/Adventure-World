@@ -1,0 +1,36 @@
+.card{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: gray;
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 1rem;
+}
+
+.adminButtons{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header{
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  font-size: x-large;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.content{
+  margin-left: 10%;
+  margin-right: 10%;
+}
