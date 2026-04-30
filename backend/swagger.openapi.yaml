@@ -186,16 +186,32 @@ paths:
       responses:
         '200':
           description: Liste des compétences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Competence'
 
     post:
       tags: [Competences]
       summary: Créer une compétence
       operationId: creerCompetence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Competence'
       security:
         - bearerAuth: []
       responses:
         '201':
           description: Créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Competence'
 
   /api/v1/competences/{id}:
     parameters:
@@ -215,6 +231,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Competence'
 
     put:
       tags: [Competences]
@@ -257,6 +277,12 @@ paths:
       responses:
         '200':
           description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AventurierDto'
 
   /api/v1/aventuriers/{id}/competences/{cId}:
     parameters:
@@ -313,6 +339,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AventurierDto'
 
   /api/v1/competences/{id}/aventuriers:
     parameters:
