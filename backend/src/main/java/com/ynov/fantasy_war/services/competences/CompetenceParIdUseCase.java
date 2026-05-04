@@ -25,7 +25,9 @@ public class CompetenceParIdUseCase {
         competenceResult.setNom(competence.getNom());
         competenceResult.setDescription(competence.getDescription());
         competenceResult.setCompetencesRequises(competence.getCompetencesRequises());
-        competenceResult.setClasseRequise(competence.getClasseRequise().toString());
+        if (competence.getClasseRequise() != null) {
+            competenceResult.setClasseRequise(competence.getClasseRequise().toString());
+        }
         competenceResult.setNiveauMinimum(competence.getNiveauMinimum());
         return competenceResult;
     }

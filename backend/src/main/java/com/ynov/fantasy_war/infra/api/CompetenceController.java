@@ -4,6 +4,7 @@ import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
 import com.ynov.fantasy_war.services.competences.*;
+import com.ynov.fantasy_war.services.competences.ListerCompetencesAventurierUseCase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,13 +17,15 @@ public class CompetenceController implements CompetencesApi {
 
     private final CreerCompetenceUseCase creerCompetenceUseCase;
     private final ListerCompetencesUseCase listerCompetencesUseCase;
+    private final ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase;
     private final CompetenceParIdUseCase competenceParIdUseCase;
     private final EditCompetenceUseCase editCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase){
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
+        this.listerCompetencesAventurierUseCase = listerCompetencesAventurierUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
         this.editCompetenceUseCase = editCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
@@ -40,7 +43,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public List<AventurierDto> listerAventuriersParCompetence(UUID competence){
-
+        return List.of();
     }
 
     @Override
@@ -50,7 +53,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public List<Competence> listerCompetencesAventurier(UUID aventurier){
-
+        return listerCompetencesAventurierUseCase.execute(aventurier);
     }
 
     @Override
@@ -65,7 +68,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public List<Competence> obtenirCompetencesDisponibles(UUID id) {
-
+        return List.of();
     }
 
     @Override
