@@ -1,0 +1,83 @@
+import logoDark from '../assets/aw-logo_dark.svg'
+import { useState } from "react"
+import apiClient from "../../AuthContext/apiClient"
+import { useNavigate } from "react-router-dom"
+import Button from '../components/ui/Button'
+import Input  from '../components/ui/Input'
+import './Login.css'
+
+export default function Login() {
+  const [email,    setEmail]    = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error,    setError]    = useState<string>('')
+  const [loading,  setLoading]  = useState<boolean>(false)
+
+  const navigate = useNavigate()
+
+  const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    try {
+      const response = await apiClient.post("/auth/login", { email, password })
+      if (response.status !== 200) throw new Error(`Response status : ${response.status}`)
+      localStorage.setItem("token", response.data.token)
+      navigate('/')
+    } catch {
+      setError("Identifiants invalides. Veuillez réessayer.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="login-page">
+
+      <div className="login-logo">
+        <img src={logoDark} alt="App Logo" />
+      </div>
+
+      <div className="login-card">
+
+        <div className="login-avatar" aria-hidden="true" />
+
+        <h1 className="login-title">Log In</h1>
+        <p  className="login-subtitle">Access the arena</p>
+
+        <form onSubmit={sendData} className="login-form" noValidate>
+          <Input
+            label="Mail"
+            type="email"
+            placeholder="exemple@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onDark
+            required
+          />
+
+          <Input
+            label="Mot de passe"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onDark
+            required
+          />
+
+          {error && <p className="login-error" role="alert">{error}</p>}
+
+          <Button
+            type="submit"
+            variant="gold"
+            size="lg"
+            fullWidth
+            disabled={loading}
+          >
+            {loading ? 'Logging in...' : 'Log In'}
+          </Button>
+        </form>
+      </div>
+    </div>
+  )
+}

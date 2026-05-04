@@ -54,6 +54,10 @@ function App() {
       <Header />
       <div className='content'>
         <h1>Adventure World</h1>
+        
+        <h2>Welcome to Adventure World</h2>
+        <h2>Please login to continue</h2>
+        
         {adventurers.map((adventurer) => (
           <div className='card'>
             {isAdmin &&
