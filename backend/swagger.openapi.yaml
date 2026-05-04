@@ -490,7 +490,7 @@ components:
             maximum: 100
         classe:
           type: string
-          enum: [GUERRIER, MAGE, RODEUR, VOLEUR, CLERC, BARDE, DRUIDE, PALADIN, BARBARE, MOINE]
+          enum: [MAITRE_D_ARMES, ECLAIREUR, ARCANISTE, GARDIEN, PREDICATEUR, GUERRIER]
 
     AventurierDto:
       allOf:
