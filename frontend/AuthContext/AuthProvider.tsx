@@ -9,7 +9,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     () => localStorage.getItem('token')
   );
 
-  const user = token ? jwtDecode(token) : null;
+  let user = null;
+  if (token) {
+    try {
+      user = jwtDecode(token);
+    } catch (error) {
+      // Token invalide, le supprimer
+      localStorage.removeItem('token');
+      setToken(null);
+    }
+  }
 
   const login = (newToken: string) => {
     localStorage.setItem('token', newToken);
