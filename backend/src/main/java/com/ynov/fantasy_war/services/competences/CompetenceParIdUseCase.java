@@ -20,15 +20,7 @@ public class CompetenceParIdUseCase {
     public Competence execute(UUID id){
         CompetenceEntity competence = competencesRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Compétence", id));
-        Competence competenceResult = new Competence();
-        competenceResult.setId(competence.getId());
-        competenceResult.setNom(competence.getNom());
-        competenceResult.setDescription(competence.getDescription());
-        competenceResult.setCompetencesRequises(competence.getCompetencesRequises());
-        if (competence.getClasseRequise() != null) {
-            competenceResult.setClasseRequise(competence.getClasseRequise().toString());
-        }
-        competenceResult.setNiveauMinimum(competence.getNiveauMinimum());
+        Competence competenceResult = CompetenceMapper.toDto(competence);
         return competenceResult;
     }
 }

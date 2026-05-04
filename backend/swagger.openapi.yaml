@@ -372,9 +372,8 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AventurierDto'
+                $ref: '#/components/schemas/AventuriersParCompetenceResponse'
+
 
 components:
 
@@ -457,6 +456,18 @@ components:
           items:
             type: string
             format: uuid
+
+    AventuriersParCompetenceResponse:
+      type: object
+      properties:
+        possesseurs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AventurierDto'
+        eligibles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AventurierDto'
 
     ErrorDetail:
       type: object

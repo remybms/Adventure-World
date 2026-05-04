@@ -2,7 +2,9 @@ package com.ynov.fantasy_war.infra.api;
 
 import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventuriersParCompetenceResponse;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.ListerAventuriersParCompetence200Response;
 import com.ynov.fantasy_war.services.competences.*;
 import com.ynov.fantasy_war.services.competences.ListerCompetencesAventurierUseCase;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +25,10 @@ public class CompetenceController implements CompetencesApi {
     private final EditCompetenceUseCase editCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
     private final RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase;
+    private final ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase;
+    private final AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase, RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase){
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.listerCompetencesAventurierUseCase = listerCompetencesAventurierUseCase;
@@ -32,11 +36,13 @@ public class CompetenceController implements CompetencesApi {
         this.editCompetenceUseCase = editCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
         this.retirerCompetenceAventurierUseCase = retirerCompetenceAventurierUseCase;
+        this.listerAventuriersParCompetenceUseCase = listerAventuriersParCompetenceUseCase;
+        this.ajouterCompetenceAventurierUseCase = ajouterCompetenceAventurierUseCase;
     }
 
     @Override
     public void ajouterCompetenceAventurier(UUID aventurier, UUID competence){
-
+        ajouterCompetenceAventurierUseCase.execute(aventurier, competence);
     }
 
     @Override
@@ -45,8 +51,8 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public List<AventurierDto> listerAventuriersParCompetence(UUID competence){
-        return List.of();
+    public AventuriersParCompetenceResponse listerAventuriersParCompetence(UUID competence){
+        return listerAventuriersParCompetenceUseCase.execute(competence);
     }
 
     @Override

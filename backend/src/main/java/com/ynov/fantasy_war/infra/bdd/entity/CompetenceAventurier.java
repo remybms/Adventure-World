@@ -16,9 +16,9 @@ public class CompetenceAventurier {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "id_competence")
     private UUID idCompetence;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "id_aventurier")
     private UUID idAventurier;
 }
