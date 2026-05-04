@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  /* Color palette */
+  --color-gold: #D9A441;
+  --color-gold-dark: #dd9c24;
+  --color-ruby: #B23A3A;
+  --color-ruby-dark: #a01d1d;
+  --color-parchment: #F4EDE4;
+  --color-dark-grey: #535252;
+
+  /* Fonts */
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Roboto', sans-serif;
+
+  /* Spacing */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Logos */
+  --logo-light: url('../assets/logo-light.svg');
+  --logo-dark: url('../assets/logo-dark.svg');
+  --logo: url('../assets/aw-logo.svg');
+}
