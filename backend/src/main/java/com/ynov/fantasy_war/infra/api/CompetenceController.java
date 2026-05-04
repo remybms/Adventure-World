@@ -4,7 +4,13 @@ import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
 import com.ynov.fantasy_war.services.competences.*;
+import com.ynov.fantasy_war.services.competences.ObtenirCompetencesDisponiblesUseCase.CompetencesDisponiblesResult;
+
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,13 +25,15 @@ public class CompetenceController implements CompetencesApi {
     private final CompetenceParIdUseCase competenceParIdUseCase;
     private final EditCompetenceUseCase editCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
+    private final ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase) {
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
         this.editCompetenceUseCase = editCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
+        this.obtenirCompetencesDisponiblesUseCase = obtenirCompetencesDisponiblesUseCase;
     }
 
     @Override
@@ -63,9 +71,19 @@ public class CompetenceController implements CompetencesApi {
         return competenceParIdUseCase.execute(id);
     }
 
-    @Override
-    public List<Competence> obtenirCompetencesDisponibles(UUID id) {
+    // @Override
+    // public List<Competence> obtenirCompetencesDisponibles(UUID id) {
 
+    // }
+
+      @Override
+    public List<Competence> obtenirCompetencesDisponibles(UUID id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @GetMapping("/api/v1/aventuriers/{id}/competences/disponibles")
+    public ResponseEntity<CompetencesDisponiblesResult> disponibles(@PathVariable UUID id) {
+        return ResponseEntity.ok(obtenirCompetencesDisponiblesUseCase.execute(id));
     }
 
     @Override
