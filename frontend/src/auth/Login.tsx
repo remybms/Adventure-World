@@ -7,7 +7,7 @@ import Input  from '../components/ui/Input'
 import './Login.css'
 
 export default function Login() {
-  const [email,    setEmail]    = useState<string>('')
+  const [username,    setUsername]    = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error,    setError]    = useState<string>('')
   const [loading,  setLoading]  = useState<boolean>(false)
@@ -19,7 +19,7 @@ export default function Login() {
     setError('')
     setLoading(true)
     try {
-      const response = await apiClient.post("/auth/login", { email, password })
+      const response = await apiClient.post("/auth/login", { username, password })
       if (response.status !== 200) throw new Error(`Response status : ${response.status}`)
       localStorage.setItem("token", response.data.token)
       navigate('/')
@@ -46,11 +46,11 @@ export default function Login() {
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
-            label="Mail"
-            type="email"
-            placeholder="exemple@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            label="Username"
+            type="username"
+            placeholder="bobdu92"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             onDark
             required
           />

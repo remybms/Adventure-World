@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function Signin() {
 
-    const [email, setEmail] = useState<string>()
+    const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
 
     const navigate = useNavigate()
@@ -13,7 +13,7 @@ export default function Signin() {
         e.preventDefault()
         try {
             const response = await apiClient.post("/auth/register", {
-                email: email,
+                username: username,
                 password: password,
                 role: "VIEWER"
             })
@@ -30,7 +30,7 @@ export default function Signin() {
 
     return (
         <form onSubmit={sendData}>
-            <input type="mail" placeholder="exemple@gmail.com" onChange={(e) => { setEmail(e.target.value) }} required/>
+            <input type="username" placeholder="bobdu92" onChange={(e) => { setUsername(e.target.value) }} required/>
             <input type="password" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} required/>
             <button type="submit">Sign In</button>
         </form>
