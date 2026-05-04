@@ -1,3 +1,4 @@
+import './styles/Variables.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -6,8 +7,8 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { PrivateRoute } from '../AuthContext/PrivateRoutes'
 import Adventurer from './Adventurer/Adventurer.tsx'
 import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
-import Login from './User/Login.tsx'
-import Signin from './User/Signin.tsx'
+import Login from './auth/Login.tsx'
+import Signin from './auth/Signin.tsx'
 import { AuthProvider } from '../AuthContext/AuthProvider.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
 

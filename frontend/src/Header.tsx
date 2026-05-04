@@ -19,7 +19,7 @@ export default function Header() {
     return (
         <div className="header">
             {isAdmin && <a href="/create-adventurer">Créer un nouvel aventurier</a>}
-            {token != null ? <button onClick={() => disconnect()}>Se déconnecter</button> : <a href="/login">Se connecter</a> }
+            {token != null ? <button onClick={() => disconnect()}>Log Out</button> : <a href="/login">Log In</a> }
         </div>
     )
 }
