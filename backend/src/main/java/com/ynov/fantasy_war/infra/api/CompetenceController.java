@@ -81,7 +81,6 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    @PreAuthorize("hasRole('ADMIN')")
     public void retirerCompetenceAventurier(UUID id, UUID cId) {
         retirerCompetenceAventurierUseCase.execute(id, cId);
     }
