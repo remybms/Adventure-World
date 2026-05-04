@@ -47,7 +47,7 @@ export default function Login() {
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
             label="Username"
-            type="username"
+            type="text"
             placeholder="bobdu92"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
