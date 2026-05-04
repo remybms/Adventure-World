@@ -31,11 +31,7 @@ public class AjouterCompetenceAventurierUseCase {
         CompetenceEntity competence = competencesRepository.findById(idCompetence)
                 .orElseThrow(() -> new NotFoundException("Compétence", idCompetence));
 
-        competenceDomain.checkNiveauRequis(competence.getNiveauMinimum(), aventurier.getNiveau());
-        competenceDomain.checkCaracteristiquePoints("Mental", competence.getMentalRequis(), aventurier.getMental());
-        competenceDomain.checkCaracteristiquePoints("Perception", competence.getPerceptionRequise(), aventurier.getPerception());
-        competenceDomain.checkCaracteristiquePoints("Physique", competence.getPhysiqueRequis(), aventurier.getPhysique());
-        competenceDomain.checkClasseRequise(competence.getClasseRequise().toString(), aventurier.getClasse().toString());
+        CompetenceMapper.checkCompetence(competenceDomain, competence, aventurier);
 
         CompetenceAventurier competenceAventurier = new CompetenceAventurier();
         competenceAventurier.setIdCompetence(competence.getId());
