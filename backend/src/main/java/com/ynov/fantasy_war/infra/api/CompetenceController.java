@@ -20,19 +20,21 @@ public class CompetenceController implements CompetencesApi {
     private final EditCompetenceUseCase editCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
     private final ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase;
+    private final AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase){
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
         this.editCompetenceUseCase = editCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
         this.listerAventuriersParCompetenceUseCase = listerAventuriersParCompetenceUseCase;
+        this.ajouterCompetenceAventurierUseCase = ajouterCompetenceAventurierUseCase;
     }
 
     @Override
     public void ajouterCompetenceAventurier(UUID aventurier, UUID competence){
-
+        ajouterCompetenceAventurierUseCase.execute(aventurier, competence);
     }
 
     @Override
