@@ -6,4 +6,8 @@ public class NotFoundException extends RuntimeException {
     public NotFoundException(String type, UUID id) {
         super("La donnée de type [" + type + "] avec l'id [" + id + "] n'existe pas");
     }
+
+    public NotFoundException(String message) {
+        super(message);
+    }
 }
