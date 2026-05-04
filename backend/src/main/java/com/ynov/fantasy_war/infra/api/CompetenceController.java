@@ -1,6 +1,7 @@
 package com.ynov.fantasy_war.infra.api;
 
 import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
 import com.ynov.fantasy_war.services.competences.*;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public void listerAventuriersParCompetence(UUID competence){
+    public List<AventurierDto> listerAventuriersParCompetence(UUID competence){
 
     }
 
