@@ -11,6 +11,6 @@ import java.util.UUID;
 
 public interface CompetenceAventurierRepository extends JpaRepository<CompetenceAventurier, UUID> {
 
-    @Query("SELECT ca.competenceId FROM CompetenceAventurier ca WHERE ca.aventurierId = :aventurierId")
+    @Query("SELECT ca.idCompetence FROM CompetenceAventurier ca WHERE ca.idAventurier = :aventurierId")
     List<UUID> findCompetenceIdsByAventurierId(@Param("aventurierId") UUID aventurierId);
 }
