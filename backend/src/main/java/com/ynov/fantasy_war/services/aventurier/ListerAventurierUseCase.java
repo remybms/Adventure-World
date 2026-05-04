@@ -26,17 +26,6 @@ public class ListerAventurierUseCase {
     }
 
     private AventurierDto toDto(AventurierEntity aventurier) {
-        AventurierDto aventurierResult = new AventurierDto();
-        aventurierResult.setId(aventurier.getId());
-        aventurierResult.setNom(aventurier.getNom());
-        aventurierResult.setDescription(aventurier.getDescription());
-        aventurierResult.setNiveau(aventurier.getNiveau());
-        ClasseEntity classeEntityResult = aventurier.getClasse();
-        AventurierDto.ClasseEnum classeResult = AventurierDto.ClasseEnum.valueOf(classeEntityResult.name());
-        aventurierResult.setClasse(classeResult);
-        aventurierResult.setPhysique(aventurier.getPhysique());
-        aventurierResult.setMental(aventurier.getMental());
-        aventurierResult.setPerception(aventurier.getPerception());
-        return aventurierResult;
+        return AventurierMapper.toDto(aventurier);
     }
 }

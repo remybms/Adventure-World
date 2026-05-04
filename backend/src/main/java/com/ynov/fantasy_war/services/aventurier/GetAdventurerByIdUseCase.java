@@ -18,17 +18,7 @@ public class GetAdventurerByIdUseCase {
     public AventurierDto execute(UUID id){
         AventurierEntity aventurier = aventurierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Aventurier", id));
-        AventurierDto aventurierDto = new AventurierDto();
-        aventurierDto.setId(aventurier.getId());
-        aventurierDto.setNom(aventurier.getNom());
-        aventurierDto.setDescription(aventurier.getDescription());
-        aventurierDto.setNiveau(aventurier.getNiveau());
-        ClasseEntity classeEntity = aventurier.getClasse();
-        AventurierDto.ClasseEnum classe = AventurierDto.ClasseEnum.valueOf(classeEntity.name());
-        aventurierDto.setClasse(classe);
-        aventurierDto.setPhysique(aventurier.getPhysique());
-        aventurierDto.setMental(aventurier.getMental());
-        aventurierDto.setPerception(aventurier.getPerception());
+        AventurierDto aventurierDto = AventurierMapper.toDto(aventurier);
         return aventurierDto;
     }
 }

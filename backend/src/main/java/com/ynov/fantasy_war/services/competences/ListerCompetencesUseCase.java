@@ -26,14 +26,7 @@ public class ListerCompetencesUseCase {
     }
 
     public Competence toDto(CompetenceEntity competence){
-        Competence competenceResult = new Competence();
-        competenceResult.setId(competence.getId());
-        competenceResult.setNom(competence.getNom());
-        competenceResult.setDescription(competence.getDescription());
-        competenceResult.setCompetencesRequises(competence.getCompetencesRequises());
-        competenceResult.setClasseRequise(competence.getClasseRequise().toString());
-        competenceResult.setNiveauMinimum(competence.getNiveauMinimum());
-        return competenceResult;
+        return CompetenceMapper.toDto(competence);
     }
 
 }
