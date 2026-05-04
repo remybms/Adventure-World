@@ -143,6 +143,7 @@
 							<configOptions>
 								<booleanGetterPrefix>is</booleanGetterPrefix>
 								<dateLibrary>java8</dateLibrary>
+								<useAllOfToExtend>true</useAllOfToExtend>
 								<delegatePattern>false</delegatePattern>
 								<generateBuilders>false</generateBuilders>
 								<generateConstructorWithAllArgs>false</generateConstructorWithAllArgs>

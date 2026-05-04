@@ -1,9 +1,8 @@
 package com.ynov.fantasy_war.infra.api;
 
-import com.ynov.fantasy_war.domain.ConflictException;
-import com.ynov.fantasy_war.domain.NotFoundException;
-import com.ynov.fantasy_war.domain.RequeteInvalideException;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -12,8 +11,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.ynov.fantasy_war.domain.ConflictException;
+import com.ynov.fantasy_war.domain.NotFoundException;
+import com.ynov.fantasy_war.domain.RequeteInvalideException;
+import com.ynov.fantasy_war.domain.UnprocessableEntityException;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestControllerAdvice
@@ -55,6 +58,12 @@ public class ApiExceptionHandler {
     public ProblemDetail handleConflictException(
             ConflictException ex) {
         return buildProblemDetail(ex, HttpStatus.CONFLICT, "Conflit détecté");
+    }
+
+    @ExceptionHandler(UnprocessableEntityException.class)
+    public ProblemDetail handleUnprocessableEntityException(
+            UnprocessableEntityException ex){
+        return buildProblemDetail(ex, HttpStatus.UNPROCESSABLE_ENTITY, "Prérequis non satisfaits");
     }
 
     private static @NonNull ProblemDetail buildProblemDetail(Exception ex, HttpStatus httpStatus, String title) {

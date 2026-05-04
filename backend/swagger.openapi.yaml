@@ -235,6 +235,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Competence'
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
 
     put:
       tags: [Competences]
@@ -251,6 +257,18 @@ paths:
       responses:
         '200':
           description: Modifiée
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+        '409':
+          description: Modification rejetée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AventurierProblemDetail'
 
     delete:
       tags: [Competences]
@@ -261,6 +279,12 @@ paths:
       responses:
         '204':
           description: Supprimée
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
 
   ########################
   # ASSOCIATION
@@ -289,6 +313,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Competence'
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
 
   /api/v1/aventuriers/{id}/competences/{cId}:
     parameters:
@@ -313,6 +343,18 @@ paths:
       responses:
         '204':
           description: Ajoutée
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+        '422':
+          description: Prérequis manquant(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AventurierProblemDetail'
 
     delete:
       tags: [Competences]
@@ -323,6 +365,18 @@ paths:
       responses:
         '204':
           description: Retirée
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+        '409':
+          description: Suppression impossible
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompetenceProblemDetail'
 
   ########################
   # VUES
@@ -349,6 +403,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CompetencesDisponiblesResult'
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
 
   /api/v1/competences/{id}/aventuriers:
     parameters:
@@ -371,6 +431,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AventuriersParCompetenceResponse'
+        '404':
+          description: Ressource introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
 
 
 components:
@@ -479,7 +545,7 @@ components:
           items:
             $ref: '#/components/schemas/Competence'
 
-    ErrorDetail:
+    ProblemDetail:
       type: object
       properties:
         type:
@@ -490,22 +556,26 @@ components:
           type: integer
         detail:
           type: string
-        aventuriersImpactes:
-          type: array
-          items:
-            type: object
-        prerequisManquants:
-          type: array
-          items:
-            type: object
-    Erreur:
-      type: object
-      required: [ statut, message ]
-      properties:
-        statut:
-          type: integer
-        message:
-          type: string
+
+    AventurierProblemDetail:
+      allOf:
+        - $ref: '#/components/schemas/ProblemDetail'
+        - type: object
+          properties:
+            prerequisManquants:
+              type: array
+              items:
+                type: object
+
+    CompetenceProblemDetail:
+      allOf:
+        - $ref: '#/components/schemas/ProblemDetail'
+        - type: object
+          properties:
+            aventurierImpacté:
+              type: array
+              items:
+                type: object
 
   responses:
     RequeteInvalide:
@@ -513,26 +583,26 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Erreur'
+            $ref: '#/components/schemas/ProblemDetail'
     NonTrouve:
       description: Ressource introuvable
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Erreur'
+            $ref: '#/components/schemas/ProblemDetail'
     ErreurServeur:
       description: Erreur serveur
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Erreur'
+            $ref: '#/components/schemas/ProblemDetail'
 
     Unauthorized:
       description: Non authentifié
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorDetail'
+            $ref: '#/components/schemas/ProblemDetail'
 
     BadRequest:
       description: Requête invalide
@@ -545,11 +615,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorDetail'
+            $ref: '#/components/schemas/ProblemDetail'
 
     UnprocessableEntity:
       description: Pré-requis non satisfaits
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorDetail'
+            $ref: '#/components/schemas/ProblemDetail'
