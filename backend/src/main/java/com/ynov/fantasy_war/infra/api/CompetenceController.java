@@ -4,9 +4,8 @@ import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventuriersParCompetenceResponse;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
-import com.ynov.fantasy_war.infrastructure.web.openapi.dto.ListerAventuriersParCompetence200Response;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.CompetencesDisponiblesResult;
 import com.ynov.fantasy_war.services.competences.*;
-import com.ynov.fantasy_war.services.competences.ObtenirCompetencesDisponiblesUseCase.CompetencesDisponiblesResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +28,9 @@ public class CompetenceController implements CompetencesApi {
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
     private final ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase;
     private final AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase;
+    private final ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase, ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase) {
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
@@ -38,6 +38,7 @@ public class CompetenceController implements CompetencesApi {
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
         this.listerAventuriersParCompetenceUseCase = listerAventuriersParCompetenceUseCase;
         this.ajouterCompetenceAventurierUseCase = ajouterCompetenceAventurierUseCase;
+        this.obtenirCompetencesDisponiblesUseCase = obtenirCompetencesDisponiblesUseCase;
     }
 
     @Override
@@ -74,20 +75,10 @@ public class CompetenceController implements CompetencesApi {
     public Competence obtenirCompetence(UUID id) {
         return competenceParIdUseCase.execute(id);
     }
-
-    // @Override
-    // public List<Competence> obtenirCompetencesDisponibles(UUID id) {
-
-    // }
-
-      @Override
-    public List<Competence> obtenirCompetencesDisponibles(UUID id) {
-        throw new UnsupportedOperationException();
-    }
-
-    @GetMapping("/api/v1/aventuriers/{id}/competences/disponibles")
-    public ResponseEntity<CompetencesDisponiblesResult> disponibles(@PathVariable UUID id) {
-        return ResponseEntity.ok(obtenirCompetencesDisponiblesUseCase.execute(id));
+    
+    @Override
+    public CompetencesDisponiblesResult obtenirCompetencesDisponibles(UUID id) {
+       return obtenirCompetencesDisponiblesUseCase.execute(id);
     }
 
     @Override

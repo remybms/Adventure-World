@@ -11,7 +11,6 @@ import com.ynov.fantasy_war.infra.bdd.entity.CompetenceAventurier;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceEntity;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventuriersParCompetenceResponse;
-import com.ynov.fantasy_war.infrastructure.web.openapi.dto.ListerAventuriersParCompetence200Response;
 import com.ynov.fantasy_war.services.aventurier.AventurierMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

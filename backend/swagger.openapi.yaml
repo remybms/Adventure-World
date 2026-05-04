@@ -348,9 +348,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Competence'
+                $ref: '#/components/schemas/CompetencesDisponiblesResult'
 
   /api/v1/competences/{id}/aventuriers:
     parameters:
@@ -468,6 +466,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AventurierDto'
+    
+    CompetencesDisponiblesResult:
+      type: object
+      properties:
+        disponibles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence'
+        bloquees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence'
 
     ErrorDetail:
       type: object

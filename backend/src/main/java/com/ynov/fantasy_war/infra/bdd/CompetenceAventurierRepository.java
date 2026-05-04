@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface CompetenceAventurierRepository extends JpaRepository<CompetenceAventurier, UUID> {
     List<CompetenceAventurier> findByIdCompetence(UUID idCompetence);
 
+    List<CompetenceAventurier> findByIdAventurier(UUID idAventurier);
 }

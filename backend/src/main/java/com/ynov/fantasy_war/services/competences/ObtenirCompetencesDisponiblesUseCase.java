@@ -1,11 +1,15 @@
 package com.ynov.fantasy_war.services.competences;
 
+import com.ynov.fantasy_war.domain.NotFoundException;
+import com.ynov.fantasy_war.domain.competence.CompetenceDomain;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.CompetenceAventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.CompetencesRepository;
+import com.ynov.fantasy_war.infra.bdd.entity.AventurierEntity;
+import com.ynov.fantasy_war.infra.bdd.entity.CompetenceAventurier;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceEntity;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
-import com.ynov.fantasy_war.NotFoundException;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.CompetencesDisponiblesResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,63 +21,53 @@ import java.util.*;
 @Service
 public class ObtenirCompetencesDisponiblesUseCase {
 
-    public record CompetenceBloquee(
+    /*public record CompetenceBloquee(
             Competence competence,
             List<Competence> prerequisManquants
-    ) {}
-
-    public record CompetencesDisponiblesResult(
-            List<Competence> acquerables,
-            List<CompetenceBloquee> bloquees
-    ) {}
+    ) {}*/
 
     private final AventurierRepository aventurierRepository;
     private final CompetencesRepository competencesRepository;
     private final CompetenceAventurierRepository competenceAventurierRepository;
-    private final ListerCompetencesUseCase listerCompetencesUseCase;
+    private final CompetenceDomain competenceDomain;
 
     public CompetencesDisponiblesResult execute(UUID aventurierId) {
+        AventurierEntity aventurier = aventurierRepository.findById(aventurierId)
+                .orElseThrow(() -> new NotFoundException("Aventurier",  aventurierId));
 
-        aventurierRepository.findById(aventurierId)
-                .orElseThrow(() -> new NotFoundException("Aventurier introuvable : " + aventurierId));
+        List<UUID> IdsCompetencesAcquises = competenceAventurierRepository.findByIdAventurier(aventurierId)
+                .stream()
+                .map(CompetenceAventurier::getIdCompetence)
+                .toList();
 
-        Set<UUID> idsAcquis = new HashSet<>(
-                competenceAventurierRepository.findCompetenceIdsByAventurierId(aventurierId)
-        );
+        List<Competence> competencesAcquises = competencesRepository.findAllById(IdsCompetencesAcquises)
+                .stream()
+                .map(this::toDto)
+                .toList();
 
-        List<CompetenceEntity> toutes = competencesRepository.findAll();
-        Map<UUID, CompetenceEntity> parId = new HashMap<>();
-        for (CompetenceEntity c : toutes) parId.put(c.getId(), c);
 
-        List<Competence> acquerables = new ArrayList<>();
-        List<CompetenceBloquee> bloquees = new ArrayList<>();
+        List<Competence> disponibles = competencesRepository.findAll()
+                .stream()
+                .filter(c -> CompetenceMapper.checkCompetence(competenceDomain, c, aventurier))
+                .map(this::toDto)
+                .filter(c -> !competencesAcquises.contains(c))
+                .toList();
 
-        for (CompetenceEntity competence : toutes) {
-            if (idsAcquis.contains(competence.getId())) continue;
+        List<Competence> bloquees = competencesRepository.findAll()
+                .stream()
+                .filter(c -> !CompetenceMapper.checkCompetence(competenceDomain, c, aventurier))
+                .map(this::toDto)
+                .filter(c -> !competencesAcquises.contains(c))
+                .toList();
 
-            List<Competence> prerequisManquants = new ArrayList<>();
+        CompetencesDisponiblesResult result = new CompetencesDisponiblesResult();
+        result.setDisponibles(disponibles);
+        result.setBloquees(bloquees);
 
-            if (competence.getCompetencesRequises() != null) {
-                for (UUID reqId : competence.getCompetencesRequises()) {
-                    if (!idsAcquis.contains(reqId)) {
-                        CompetenceEntity manquante = parId.get(reqId);
-                        if (manquante != null) {
-                            prerequisManquants.add(listerCompetencesUseCase.toDto(manquante));
-                        }
-                    }
-                }
-            }
+        return result;
+    }
 
-            if (prerequisManquants.isEmpty()) {
-                acquerables.add(listerCompetencesUseCase.toDto(competence));
-            } else {
-                bloquees.add(new CompetenceBloquee(
-                        listerCompetencesUseCase.toDto(competence),
-                        prerequisManquants
-                ));
-            }
-        }
-
-        return new CompetencesDisponiblesResult(acquerables, bloquees);
+    private Competence toDto (CompetenceEntity competenceEntity) {
+        return CompetenceMapper.toDto(competenceEntity);
     }
 }
