@@ -13,4 +13,5 @@ public interface CompetenceAventurierRepository extends JpaRepository<Competence
     void deleteByIdAventurierAndIdCompetence(UUID idAventurier, UUID idCompetence);
     List<CompetenceAventurier> findByIdCompetence(UUID idCompetence);
 
+    List<CompetenceAventurier> findByIdAventurier(UUID idAventurier);
 }
