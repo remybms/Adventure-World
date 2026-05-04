@@ -36,17 +36,7 @@ public class CreerAventurierUseCase {
         aventurier.setPerception(aventurierDto.getPerception());
         aventurier.setPhysique(aventurierDto.getPhysique());
         aventurierRepository.save(aventurier);
-        AventurierDto aventurierResult = new AventurierDto();
-        aventurierResult.setId(aventurier.getId());
-        aventurierResult.setNom(aventurier.getNom());
-        aventurierResult.setDescription(aventurier.getDescription());
-        aventurierResult.setNiveau(aventurier.getNiveau());
-        ClasseEntity classeEntityResult = aventurier.getClasse();
-        AventurierDto.ClasseEnum classeResult = AventurierDto.ClasseEnum.valueOf(classeEntityResult.name());
-        aventurierResult.setClasse(classeResult);
-        aventurierResult.setPhysique(aventurier.getPhysique());
-        aventurierResult.setMental(aventurier.getMental());
-        aventurierResult.setPerception(aventurier.getPerception());
+        AventurierDto aventurierResult = AventurierMapper.toDto(aventurier);
         return aventurierResult;
     }
 

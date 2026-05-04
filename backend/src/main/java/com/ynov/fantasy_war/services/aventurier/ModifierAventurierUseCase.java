@@ -37,16 +37,7 @@ public class ModifierAventurierUseCase {
         }
 
         aventurierRepository.save(aventurier);
-        AventurierDto aventurierDto = new AventurierDto();
-        aventurierDto.setNom(aventurier.getNom());
-        aventurierDto.setDescription(aventurier.getDescription());
-        aventurierDto.setNiveau(aventurier.getNiveau());
-        ClasseEntity classeEntity = aventurier.getClasse();
-        AventurierDto.ClasseEnum classe = AventurierDto.ClasseEnum.valueOf(classeEntity.name());
-        aventurierDto.setClasse(classe);
-        aventurierDto.setPhysique(aventurier.getPhysique());
-        aventurierDto.setMental(aventurier.getMental());
-        aventurierDto.setPerception(aventurier.getPerception());
+        AventurierDto aventurierDto = AventurierMapper.toDto(aventurier);
         AventurierMapper.fillAventurier(aventurierPayload, aventurierDto, id);
         aventurierRepository.save(aventurier);
 
