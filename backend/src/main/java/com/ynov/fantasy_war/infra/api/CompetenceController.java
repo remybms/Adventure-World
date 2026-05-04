@@ -19,13 +19,15 @@ public class CompetenceController implements CompetencesApi {
     private final CompetenceParIdUseCase competenceParIdUseCase;
     private final EditCompetenceUseCase editCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
+    private final ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase){
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase){
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
         this.editCompetenceUseCase = editCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
+        this.listerAventuriersParCompetenceUseCase = listerAventuriersParCompetenceUseCase;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public List<AventurierDto> listerAventuriersParCompetence(UUID competence){
-
+        return listerAventuriersParCompetenceUseCase.execute(competence);
     }
 
     @Override
