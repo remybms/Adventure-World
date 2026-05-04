@@ -17,14 +17,7 @@ public class CreerCompetenceUseCase {
 
     public Competence execute(Competence competencePayload){
         log.info("Création d'une compétence");
-        CompetenceEntity competence = new CompetenceEntity();
-        competence.setId(competencePayload.getId());
-        competence.setNom(competencePayload.getNom());
-        competence.setDescription(competencePayload.getDescription());
-        ClasseEntity classeEntity = ClasseEntity.valueOf(competencePayload.getClasseRequise());
-        competence.setClasseRequise(classeEntity);
-        competence.setCompetencesRequises(competencePayload.getCompetencesRequises());
-        competence.setNiveauMinimum(competencePayload.getNiveauMinimum());
+        CompetenceEntity competence = CompetenceMapper.fillCompetence(competencePayload);
         competencesRepository.save(competence);
         return competencePayload;
     }

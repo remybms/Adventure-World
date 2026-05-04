@@ -2,7 +2,9 @@ package com.ynov.fantasy_war.infra.api;
 
 import com.ynov.fantasy_war.infrastructure.web.openapi.api.CompetencesApi;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventuriersParCompetenceResponse;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.ListerAventuriersParCompetence200Response;
 import com.ynov.fantasy_war.services.competences.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,7 @@ public class CompetenceController implements CompetencesApi {
     }
 
     @Override
-    public List<AventurierDto> listerAventuriersParCompetence(UUID competence){
+    public AventuriersParCompetenceResponse listerAventuriersParCompetence(UUID competence){
         return listerAventuriersParCompetenceUseCase.execute(competence);
     }
 
