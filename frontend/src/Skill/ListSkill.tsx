@@ -40,32 +40,31 @@ export default function ListSkill() {
         <div style={{
             display: "flex",
             flexDirection: "column",
-            gap: "15px",
+            gap: "30px",
             padding: "50px"
         }}>
             {skills.map((skill) => (
                 <div
                     key={skill.id}
                     style={{
-                        backgroundColor: "#d9d9d9", // Gris du wireframe
-                        border: "1px solid #777",
-                        padding: "30px",
-                        borderRadius: "10px",
+                        backgroundColor: "#F4EDE4",
+                        border: "2px solid #D9A441",
+                        padding: "25px 40px",
+                        borderRadius: "8px",
+                        height: "183px",
                         display: "flex",
                         alignItems: "center",
-                        boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
                     }}
                 >
                     <span style={{
+                        fontFamily: "'Cinzel', serif",
                         textTransform: "uppercase",
-                        fontWeight: "600",
-                        letterSpacing: "2px",
-                        color: "#000",
-                        fontFamily: "sans-serif"
+                        fontWeight: "700",
+                        color: "#414141",
+                        fontSize: "25px"
                     }}>
                         {skill.nom}
                     </span>
-
                 </div>
             ))}
         </div>
