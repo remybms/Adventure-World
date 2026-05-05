@@ -35,7 +35,7 @@ function App() {
         <div className='grid'>
           {adventurers.map((adventurer) => (
           <div className='card'>
-            <a href={`/aventurier?id=${adventurer.id}`}>
+            <a href={`/adventurers/detail?id=${adventurer.id}`}>
               <h2>{adventurer.nom}</h2>
             </a>
           </div>
