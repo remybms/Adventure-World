@@ -1,5 +1,5 @@
-import type { JwtPayload } from "jwt-decode";
 import { createContext, useContext } from "react";
+import type { CustomJwtPayload } from "../src/Types";
 
 interface AuthContextType {
   token: string | null;
@@ -7,10 +7,6 @@ interface AuthContextType {
   login: (newToken: string) => void;
   logout: () => void;
 }
-
-type CustomJwtPayload = JwtPayload & {
-  scope?: string;
-};
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 

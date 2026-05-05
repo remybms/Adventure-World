@@ -1,14 +1,14 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import apiClient from "../../AuthContext/apiClient"
 import { useEffect, useState } from "react";
-import { type AventuriersOnCompetence, type SkillType } from "../Types";
+import { type AdventurersOnSkill, type SkillType } from "../Types";
 import "./detail.css"
 import Button from "../components/ui/Button";
 
 export default function SkillDetail() {
 
     const [skill, setSkill] = useState<SkillType>()
-    const [adventurers, setAdventurers] = useState<AventuriersOnCompetence>()
+    const [adventurers, setAdventurers] = useState<AdventurersOnSkill>()
     const [error, setError] = useState<unknown>()
 
 
