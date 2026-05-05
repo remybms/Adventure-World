@@ -27,6 +27,7 @@ public class CompetenceEntity {
     @Column(length = 500)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 30)
     private ClasseEntity classeRequise;
 
