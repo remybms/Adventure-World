@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import Button from '../components/ui/Button'
 import Input  from '../components/ui/Input'
 import './Login.css'
+import Icon from '../components/ui/Icons'
 
 type Role = 'VIEWER' | 'EDITOR' | 'ADMIN'
 
@@ -59,10 +60,12 @@ export default function SignIn() {
 
       <div className="login-card">
 
-        <div className="login-avatar" aria-hidden="true" />
+        <div className="login-avatar" aria-hidden="true" >
+            <Icon name="personFilled" size={70} />
+        </div>        
 
         <h1 className="login-title">Create an account</h1>
-        <p  className="login-subtitle">Join the arena</p>
+        <p  className="login-subtitle">And join the arena</p>
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
