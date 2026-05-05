@@ -23,7 +23,7 @@ body {
 .login-card {
   background-color: var(--color-ruby);
   border-radius:    var(--radius-lg);
-  padding:          2.5rem 2.25rem 2.75rem;
+  padding:          2.25rem;
   width:            100%;
   max-width:        430px;
   display:          flex;
@@ -33,12 +33,15 @@ body {
 }
 
 .login-avatar {
-  width:            72px;
-  height:           72px;
-  border-radius:    50%;
-  background-color: var(--color-dark-grey);
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  /* flex-shrink: 0; */
   margin-bottom:    1.25rem;
-  flex-shrink:      0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-title {
@@ -55,8 +58,8 @@ body {
   font-family:    var(--font-body);
   font-size:      0.95rem;
   font-weight:    300;
-  color:          rgba(244, 237, 228, 0.8);
-  margin:         0 0 2rem;
+  color:          var(--color-parchment);
+  margin:         0 0 1rem;
   text-align:     center;
 }
 

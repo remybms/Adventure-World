@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import Input  from '../components/ui/Input'
 import './Login.css'
+import Icon from '../components/ui/Icons'
 
 export default function Login() {
   const [username,    setUsername]    = useState<string>('')
@@ -47,10 +48,12 @@ export default function Login() {
 
       <div className="login-card">
 
-        <div className="login-avatar" aria-hidden="true" />
+        <div className="login-avatar" aria-hidden="true" >
+            <Icon name="personFilled" size={70} />
+        </div>
 
         <h1 className="login-title">Log In</h1>
-        <p  className="login-subtitle">Enter the arena</p>
+        <p  className="login-subtitle">And enter the arena</p>
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
