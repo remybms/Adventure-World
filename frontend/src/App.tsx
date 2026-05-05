@@ -1,23 +1,11 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import apiClient from '../AuthContext/apiClient'
-import type { AdventurerType, CustomJwtPayload } from './Types'
-import { jwtDecode } from 'jwt-decode'
+import type { AdventurerType } from './Types'
 
 function App() {
 
   const [adventurers, setAdventurers] = useState<AdventurerType[]>()
-
-  const token = localStorage.getItem("token")
-  let isAdmin = false;
-  if (token) {
-    try {
-      isAdmin = jwtDecode<CustomJwtPayload>(token).scope.includes("ADMIN");
-    } catch (error) {
-      console.log("Invalid token:", error);
-    }
-  }
-
 
   useEffect(() => {
     const fetchData = async () => {
