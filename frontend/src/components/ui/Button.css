@@ -2,7 +2,7 @@
   display:         inline-flex;
   align-items:     center;
   justify-content: center;
-  gap:             0.5rem;
+  gap:             0.3rem;
   
   font-family:     var(--font-body);
   font-weight:     600;
@@ -22,8 +22,9 @@
   font-size: 0.8rem;  
 }
 .btn--md { 
-  padding: 0.75rem 1.5rem; 
-  font-size: 0.95rem; 
+  padding:     0 1.2rem;
+  height:      2.65rem;
+  font-size:   0.95rem;
 }
 .btn--lg { 
   padding: 0.9rem 2rem;   
@@ -35,7 +36,7 @@
 
 .btn--gold {
   background-color: var(--color-gold);
-  color:            #fff;
+  color: var(--color-parchment);
 }
 .btn--gold:hover:not(:disabled)  { 
   background-color: var(--color-gold-dark); 
@@ -43,7 +44,7 @@
 
 .btn--ruby {
   background-color: var(--color-ruby);
-  color:            #fff;
+  color:            var(--color-parchment);
 }
 .btn--ruby:hover:not(:disabled) { 
   background-color: var(--color-ruby-dark); 
@@ -64,3 +65,5 @@
   opacity: 0.5;
   cursor:  not-allowed;
 }
+
+

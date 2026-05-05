@@ -3,14 +3,24 @@ import { jwtDecode } from 'jwt-decode'
 import type { CustomJwtPayload } from '../../Types'
 import Button from '../ui/Button'
 import './Header.css'
+import Icon from '../ui/Icons'
 
 // Associe chaque path à un titre lisible
 const PAGE_TITLES: Record<string, string> = {
   '/adventurers':        'Adventurers',
-  '/create-adventurer':  'Créer un aventurier',
-  '/update-adventurer':  'Modifier un aventurier',
+  '/create-adventurer':  'Create Adventurer',
+  '/update-adventurer':  'Update Adventurer',
   '/skills':             'Skills',
-  '/params':             'Paramètres',
+  '/create-skill':       'Create Skill',
+  '/update-skill':       'Update Skill',
+  '/params':             'Parameters',
+}
+
+// Détermine la route de création selon la page actuelle
+const getCreateRoute = (pathname: string): string => {
+  if (pathname.includes('/skills')) return '/create-skill'
+  if (pathname.includes('/adventurers')) return '/create-adventurer'
+  return '/create-adventurer'
 }
 
 export default function Header() {
@@ -23,6 +33,7 @@ export default function Header() {
     : false
 
   const pageTitle = PAGE_TITLES[location.pathname] ?? 'Arena'
+  const createRoute = getCreateRoute(location.pathname)
 
   return (
     <header className="app-header">
@@ -33,9 +44,11 @@ export default function Header() {
           <Button
             variant="gold"
             size="md"
-            onClick={() => navigate('/create-adventurer')}
+            onClick={() => navigate(createRoute)}
+            title="Create new item"
           >
-            + Créer
+          <Icon name="addWhite" className="btn-icon--lg" size={30} />
+            Create
           </Button>
         )}
 
@@ -44,7 +57,7 @@ export default function Header() {
           size="md"
           onClick={() => navigate('/adventurers')} 
         >
-          Rechercher
+          Search
         </Button>
       </div>
     </header>
