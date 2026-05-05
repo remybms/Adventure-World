@@ -7,6 +7,15 @@ function App() {
 
   const [adventurers, setAdventurers] = useState<AdventurerType[]>()
 
+  const token = localStorage.getItem("token")
+  let isAdmin = false;
+  if (token) {
+    try {
+      isAdmin = jwtDecode<CustomJwtPayload>(token).scope.includes("ADMIN");
+    } catch (error) {
+      console.log("Invalid token:", error);
+    }
+  }
 
 
   useEffect(() => {
