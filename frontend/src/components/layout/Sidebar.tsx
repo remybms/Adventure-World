@@ -59,7 +59,7 @@ export default function Sidebar({ username }: SidebarProps) {
               <span className="sidebar-icon">
                 <Icon name={isActive ? 'parametersFilled' : 'parametersEmpty'} />
               </span>
-              Params
+              Parameters
             </>
           )}
         </NavLink>
@@ -68,7 +68,7 @@ export default function Sidebar({ username }: SidebarProps) {
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-avatar" aria-hidden="true">
-            <Icon name="personEmpty" size={40} />
+            <Icon name="personFilled" size={44} />
           </div>
           <div className="sidebar-user-info">
             <span className="sidebar-username">{username}</span>
