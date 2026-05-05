@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Input from "../components/ui/Input";
-import './CreateCompetence.css'
+import './CreateSkill.css'
 import Button from "../components/ui/Button";
 import apiClient from "../../AuthContext/apiClient";
 import { useNavigate, useSearchParams } from "react-router-dom";

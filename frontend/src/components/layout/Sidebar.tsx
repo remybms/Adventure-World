@@ -10,7 +10,7 @@ interface SidebarProps {
   role:     string
 }
 
-export default function Sidebar({ username, role }: SidebarProps) {
+export default function Sidebar({ username }: SidebarProps) {
   const navigate = useNavigate()
   const { logout } = useAuth()
 

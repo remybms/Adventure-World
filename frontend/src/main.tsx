@@ -13,6 +13,7 @@ import Signin from './auth/Signin.tsx'
 
 // protected pages with sidebar + header
 import App from './App.tsx'
+import Adventurer from './Adventurer/Adventurer.tsx'
 import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
 import SkillDetail from './Skills/SkillDetail.tsx'
@@ -27,9 +28,7 @@ const router = createBrowserRouter(
 
       <Route path='/login'    element={<Login />} />
       <Route path='/register' element={<Signin />} />
-      {/*to fix*/}
-      <Route path='/' element={<App />} />
-      <Route path='/aventurier' element={<Adventurer />} />
+      <Route path='/adventurers/detail' element={<Adventurer />} />
       <Route path='/skills' element={<ListSkill />} />
       <Route path='/skills/detail' element={<SkillDetail />} />
       <Route path='create-skill' element={
@@ -37,11 +36,10 @@ const router = createBrowserRouter(
           <CreateSkill />
         </PrivateRoute>
       } />
-    </>
 
       {/* sidebar + dynamic header */}
       <Route element={<PrivateRoute><AppLayout /></PrivateRoute>}>
-        <Route path='/adventurers'   element={<App />} />
+        <Route path='/adventurers' element={<App />} />
         <Route
           path='/create-adventurer'
           element={

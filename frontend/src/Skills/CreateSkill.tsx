@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../components/ui/Input";
-import './CreateCompetence.css'
+import './CreateSkill.css'
 import Button from "../components/ui/Button";
 import apiClient from "../../AuthContext/apiClient";
 import { useNavigate } from "react-router-dom";
@@ -39,12 +39,12 @@ export default function CreateSkill() {
 
     return (
         <>
-            <h1>Create a competence !</h1>
+            <h1>Create a skill !</h1>
             <form className="form" onSubmit={sendData}>
                 <Input
-                    label="Competence name"
+                    label="Skill name"
                     type="text"
-                    placeholder="competence name"
+                    placeholder="skill name"
                     onDark
                     onChange={(e) => setName(e.target.value)}
                     required />
@@ -103,7 +103,7 @@ export default function CreateSkill() {
                         <option value="PREDICATEUR">Preacher</option>
                     </select>
                 </div>
-                <Button type="submit" size="lg" className="submitButton">Create a competence !</Button>
+                <Button type="submit" size="lg" className="submitButton">Create a skill !</Button>
             </form>
         </>
     )
