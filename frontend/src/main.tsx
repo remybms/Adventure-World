@@ -18,7 +18,7 @@ import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
 import SkillDetail from './Skills/SkillDetail.tsx'
 import CreateSkill from './Skills/CreateSkill.tsx'
-import ListSkill from './Skill/ListSkill.tsx'
+import ListSkill from './Skills/ListSkill.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
