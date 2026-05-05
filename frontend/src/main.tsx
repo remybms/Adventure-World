@@ -15,6 +15,9 @@ import Signin from './auth/Signin.tsx'
 import App from './App.tsx'
 import CreateAdventurer from './Adventurer/CreateAdventurer.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
+import SkillDetail from './Skills/SkillDetail.tsx'
+import CreateSkill from './Skills/CreateSkill.tsx'
+import ListSkill from './Skill/ListSkill.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +27,17 @@ const router = createBrowserRouter(
 
       <Route path='/login'    element={<Login />} />
       <Route path='/register' element={<Signin />} />
+      {/*to fix*/}
+      <Route path='/' element={<App />} />
+      <Route path='/aventurier' element={<Adventurer />} />
+      <Route path='/skills' element={<ListSkill />} />
+      <Route path='/skills/detail' element={<SkillDetail />} />
+      <Route path='create-skill' element={
+        <PrivateRoute requiredRole='ADMIN'>
+          <CreateSkill />
+        </PrivateRoute>
+      } />
+    </>
 
       {/* sidebar + dynamic header */}
       <Route element={<PrivateRoute><AppLayout /></PrivateRoute>}>
