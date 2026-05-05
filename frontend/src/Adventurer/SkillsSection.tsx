@@ -38,9 +38,6 @@ function SkillBadge({ competence }: { competence: Competence }) {
   return (
     <div className="skill-badge" title={competence.description}>
       <span className="skill-name">{competence.nom}</span>
-      {competence.classeRequise && (
-        <span className="skill-class">{competence.classeRequise}</span>
-      )}
     </div>
   );
 }
@@ -49,9 +46,6 @@ function EligibleBadge({ competence }: { competence: Competence }) {
   return (
     <div className="skill-badge eligible" title={competence.description}>
       <span className="skill-name">{competence.nom}</span>
-      {competence.niveauMinimum && (
-        <span className="skill-class">Niv. {competence.niveauMinimum}</span>
-      )}
     </div>
   );
 }
