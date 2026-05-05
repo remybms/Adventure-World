@@ -18,7 +18,7 @@ public class CompetenceMapper {
         competenceResult.setNiveauMinimum(competence.getNiveauMinimum());
         competenceResult.setMentalMinimum(competence.getMentalRequis());
         competenceResult.setPerceptionMinimum(competence.getPerceptionRequise());
-        competenceResult.setPhysiqueMinimum(competenceResult.getPhysiqueMinimum());
+        competenceResult.setPhysiqueMinimum(competence.getPhysiqueRequis());
         return competenceResult;
     }
 

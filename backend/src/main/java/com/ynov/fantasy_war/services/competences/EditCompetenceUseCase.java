@@ -22,7 +22,6 @@ public class EditCompetenceUseCase {
     public void execute(UUID id, Competence competencePayload){
         CompetenceEntity competence = competencesRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Competence", id));
-        competence.setId(competencePayload.getId());
         competence.setNom(competencePayload.getNom());
         competence.setDescription(competencePayload.getDescription());
         ClasseEntity classeEntity = ClasseEntity.valueOf(competencePayload.getClasseRequise());

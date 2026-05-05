@@ -20,7 +20,7 @@ export default function CreateSkill() {
     const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try{
-            const response = await apiClient.post("/api/v1/competence", {
+            const response = await apiClient.post("/api/v1/competences", {
                 nom: name,
                 description: description,
                 classeRequise: requiredClass,
@@ -29,9 +29,12 @@ export default function CreateSkill() {
                 mentalMinimum: minimumMental,
                 perceptionMinimum: minimumPerception
             })
+            if (response.status != 201){
+                throw new Error(`Response status: ${response.status}`)
+            }
             const data = await response.data
             console.log(data)
-            navigate("/")
+            navigate("/skills")
         } catch (e) {
             console.log(e)
         }
