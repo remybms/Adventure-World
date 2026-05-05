@@ -120,6 +120,14 @@ export default function SignIn() {
           >
             {loading ? 'Creating...' : 'Create Account'}
           </Button>
+
+          <div className="btm-link">
+            <p>You already have an account ?</p>
+            <a className="login-register-link" onClick={() => navigate('/login')}>
+                Log In here
+            </a>
+          </div>
+
         </form>
       </div>
     </div>
