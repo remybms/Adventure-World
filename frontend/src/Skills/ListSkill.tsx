@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import du hook de navigation
 import apiClient from "../../AuthContext/apiClient";
-import type { SkillType } from "../SkillType";
+import type { SkillType } from "../Types";
 
 export default function ListSkill() {
     const [skills, setSkills] = useState<SkillType[]>([]);

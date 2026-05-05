@@ -1,8 +1,8 @@
 package com.ynov.fantasy_war.services.users;
 
 
-import com.ynov.fantasy_war.infra.bdd.UsersRepository;
-import com.ynov.fantasy_war.infra.bdd.entity.AppUser;
+import com.ynov.fantasy_war.infra.bdd.UtilisateursRepository;
+import com.ynov.fantasy_war.infra.bdd.entity.UtilisateurEntity;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AuthRequest;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AuthResponse;
 import com.ynov.fantasy_war.services.users.jwt.JwtService;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersUseCase {
 
-    private final UsersRepository usersRepository;
+    private final UtilisateursRepository utilisateursRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +36,7 @@ public class UsersUseCase {
     }
 
     public void inscription(AuthRequest authRequest){
-        AppUser user = new AppUser(authRequest.getUsername(), passwordEncoder.encode(authRequest.getPassword()), "VIEWER");
-        usersRepository.save(user);
+        UtilisateurEntity user = new UtilisateurEntity(authRequest.getUsername(), passwordEncoder.encode(authRequest.getPassword()), authRequest.getRole());
+        utilisateursRepository.save(user);
     }
 }

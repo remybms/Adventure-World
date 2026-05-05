@@ -2,8 +2,6 @@ package com.ynov.fantasy_war.services.competences;
 
 import com.ynov.fantasy_war.domain.NotFoundException;
 import com.ynov.fantasy_war.infra.bdd.CompetencesRepository;
-import com.ynov.fantasy_war.infra.bdd.entity.AventurierEntity;
-import com.ynov.fantasy_war.infra.bdd.entity.ClasseEntity;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceEntity;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class EditCompetenceUseCase {
+public class ModifierCompetenceUseCase {
 
     private final CompetencesRepository competencesRepository;
 

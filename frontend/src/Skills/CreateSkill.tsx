@@ -10,7 +10,7 @@ export default function CreateSkill() {
     const [name, setName] = useState<string>()
     const [description, setDescription] = useState<string>()
     const [minimumLevel, setMinimumLevel] = useState<number>(1)
-    const [minimumPhysics, setMinimumPhysics] = useState<number>(1)
+    const [minimumPhysical, setMinimumPhysical] = useState<number>(1)
     const [minimumPerception, setMinimumPerception] = useState<number>(1)
     const [minimumMental, setMinimumMental] = useState<number>(1)
     const [requiredClass, setRequiredClass] = useState<string>()
@@ -25,7 +25,7 @@ export default function CreateSkill() {
                 description: description,
                 classeRequise: requiredClass,
                 niveauMinimum: minimumLevel,
-                physiqueMinimum: minimumPhysics,
+                physiqueMinimum: minimumPhysical,
                 mentalMinimum: minimumMental,
                 perceptionMinimum: minimumPerception
             })
@@ -67,13 +67,13 @@ export default function CreateSkill() {
                     onDark
                     onChange={(e) => setMinimumLevel(Number(e.target.value))} />
                 <Input
-                    label="Minimum Physics"
+                    label="Minimum Physical"
                     type="number"
-                    placeholder="minimum physics, option not required"
+                    placeholder="minimum physical, option not required"
                     min={1}
                     max={50}
                     onDark
-                    onChange={(e) => setMinimumPhysics(Number(e.target.value))} />
+                    onChange={(e) => setMinimumPhysical(Number(e.target.value))} />
                 <Input
                     label="Minimum Perception"
                     type="number"

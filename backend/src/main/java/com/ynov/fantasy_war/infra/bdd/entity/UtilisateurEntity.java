@@ -13,7 +13,7 @@ import lombok.ToString;
         name = "users",
         uniqueConstraints = @UniqueConstraint(columnNames = "username")
 )
-public class AppUser {
+public class UtilisateurEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +30,12 @@ public class AppUser {
     private String role; // ex: "ROLE_USER"
 
 
-    protected AppUser() {
+    protected UtilisateurEntity() {
         // JPA only
     }
 
 
-    public AppUser(String username, String passwordHash, String role) {
+    public UtilisateurEntity(String username, String passwordHash, String role) {
         this.username = username;
         this.passwordHash = passwordHash;
         this.role = role;

@@ -17,15 +17,15 @@ public class AventurierController implements AventuriersApi {
 
     private final CreerAventurierUseCase creerAventurierUseCase;
     private final ModifierAventurierUseCase modifierAventurierUseCase;
-    private final GetAdventurerByIdUseCase getAdventurerByIdUseCase;
-    private final DeleteAdventurerUseCase deleteAdventurerUseCase;
+    private final ObtenirAventurierParIdUseCase obtenirAventurierParIdUseCase;
+    private final SupprimerAventurierUseCase supprimerAventurierUseCase;
     private final ListerAventurierUseCase listerAventurierUseCase;
 
-    public AventurierController(CreerAventurierUseCase creerAventurierUseCase, ModifierAventurierUseCase modifierAventurierUseCase, GetAdventurerByIdUseCase getAdventurerByIdUseCase, DeleteAdventurerUseCase deleteAdventurerUseCase, ListerAventurierUseCase listerAventurierUseCase) {
+    public AventurierController(CreerAventurierUseCase creerAventurierUseCase, ModifierAventurierUseCase modifierAventurierUseCase, ObtenirAventurierParIdUseCase obtenirAventurierParIdUseCase, SupprimerAventurierUseCase supprimerAventurierUseCase, ListerAventurierUseCase listerAventurierUseCase) {
         this.creerAventurierUseCase = creerAventurierUseCase;
         this.modifierAventurierUseCase = modifierAventurierUseCase;
-        this.getAdventurerByIdUseCase = getAdventurerByIdUseCase;
-        this.deleteAdventurerUseCase = deleteAdventurerUseCase;
+        this.obtenirAventurierParIdUseCase = obtenirAventurierParIdUseCase;
+        this.supprimerAventurierUseCase = supprimerAventurierUseCase;
         this.listerAventurierUseCase = listerAventurierUseCase;
     }
 
@@ -50,13 +50,13 @@ public class AventurierController implements AventuriersApi {
 
     @Override
     public AventurierDto obtenirAventurier(UUID id) {
-        AventurierDto aventurierDto = getAdventurerByIdUseCase.execute(id);
+        AventurierDto aventurierDto = obtenirAventurierParIdUseCase.execute(id);
         return aventurierDto;
     }
 
     @Override
     public void supprimerAventurier(UUID id) {
-        deleteAdventurerUseCase.execute(id);
+        supprimerAventurierUseCase.execute(id);
     }
 }
 

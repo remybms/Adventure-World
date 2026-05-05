@@ -2,6 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
+import type { CustomJwtPayload } from "../src/Types";
 
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -12,9 +13,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   let user = null;
   if (token) {
     try {
-      user = jwtDecode(token);
+      user = jwtDecode<CustomJwtPayload>(token);
     } catch (error) {
       // Token invalide, le supprimer
+      console.log(error)
       localStorage.removeItem('token');
       setToken(null);
     }
