@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import du hook de navigation
 import apiClient from "../../AuthContext/apiClient";
 import type { SkillType } from "../SkillType";
 
@@ -6,11 +7,12 @@ export default function ListSkill() {
     const [skills, setSkills] = useState<SkillType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
+    
+    const navigate = useNavigate(); // Initialisation du navigateur
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Utilisation de l'endpoint exact défini dans l'OpenAPI
                 const response = await apiClient.get("/api/v1/competences");
                 
                 if (response.status !== 200) {
@@ -28,12 +30,12 @@ export default function ListSkill() {
         fetchData();
     }, []);
 
-   if (loading) {
-        return <div>Loading skill catalog...</div>;
+    if (loading) {
+        return <div style={{ fontFamily: "'Cinzel', serif", padding: "50px" }}>Loading skill catalog...</div>;
     }
 
     if (error) {
-        return <div>Error: {String(error)}</div>;
+        return <div style={{ padding: "50px", color: "red" }}>Error: {String(error)}</div>;
     }
 
     return (
@@ -46,6 +48,7 @@ export default function ListSkill() {
             {skills.map((skill) => (
                 <div
                     key={skill.id}
+                    onClick={() => navigate(`/skills/detail?id=${skill.id}`)} // Redirection ici
                     style={{
                         backgroundColor: "#F4EDE4",
                         border: "2px solid #D9A441",
@@ -54,7 +57,12 @@ export default function ListSkill() {
                         height: "183px",
                         display: "flex",
                         alignItems: "center",
+                        cursor: "pointer", // Curseur main pour indiquer le clic
+                        transition: "transform 0.1s ease-in-out",
                     }}
+                    // Petit effet visuel au clic (optionnel)
+                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.01)"}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                 >
                     <span style={{
                         fontFamily: "'Cinzel', serif",
