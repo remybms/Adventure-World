@@ -11,6 +11,8 @@ const PAGE_TITLES: Record<string, string> = {
   '/create-adventurer':  'Create Adventurer',
   '/update-adventurer':  'Update Adventurer',
   '/skills':             'Skills',
+  '/create-skill':       'Create Skill',
+  '/update-skill':       'Update Skill',
   '/params':             'Parameters',
 }
 
