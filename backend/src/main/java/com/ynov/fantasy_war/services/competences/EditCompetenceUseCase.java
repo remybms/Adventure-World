@@ -22,15 +22,7 @@ public class EditCompetenceUseCase {
     public void execute(UUID id, Competence competencePayload){
         CompetenceEntity competence = competencesRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Competence", id));
-        competence.setNom(competencePayload.getNom());
-        competence.setDescription(competencePayload.getDescription());
-        ClasseEntity classeEntity = ClasseEntity.valueOf(competencePayload.getClasseRequise());
-        competence.setClasseRequise(classeEntity);
-        competence.setCompetencesRequises(competencePayload.getCompetencesRequises());
-        competence.setNiveauMinimum(competencePayload.getNiveauMinimum());
-        competence.setPhysiqueRequis(competencePayload.getPhysiqueMinimum());
-        competence.setMentalRequis(competencePayload.getMentalMinimum());
-        competence.setPerceptionRequise(competencePayload.getPerceptionMinimum());
+        CompetenceMapper.fillCompetence(competencePayload, competence);
         competencesRepository.save(competence);
     }
 }

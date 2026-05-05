@@ -97,7 +97,7 @@ export default function CreateSkill() {
                         className="input-field select-field"
                         onChange={(e) => setRequiredClass(e.target.value)}
                     >
-                        <option value="">Choose a class, option not required</option>
+                        <option value={undefined}>Choose a class, option not required</option>
                         <option value="GUERRIER">Warrior</option>
                         <option value="ECLAIREUR">Scout</option>
                         <option value="MAITRE_D_ARMES">Weapons Master</option>
