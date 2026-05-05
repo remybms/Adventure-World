@@ -23,19 +23,19 @@ public class CompetenceController implements CompetencesApi {
     private final ListerCompetencesUseCase listerCompetencesUseCase;
     private final ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase;
     private final CompetenceParIdUseCase competenceParIdUseCase;
-    private final EditCompetenceUseCase editCompetenceUseCase;
+    private final ModifierCompetenceUseCase modifierCompetenceUseCase;
     private final DeleteCompetenceUseCase deleteCompetenceUseCase;
     private final RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase;
     private final ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase;
     private final AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase;
     private final ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase;
 
-    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase, CompetenceParIdUseCase competenceParIdUseCase, EditCompetenceUseCase editCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase, RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase, ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase) {
+    public CompetenceController(CreerCompetenceUseCase creerCompetenceUseCase, ListerCompetencesUseCase listerCompetencesUseCase, ListerCompetencesAventurierUseCase listerCompetencesAventurierUseCase, CompetenceParIdUseCase competenceParIdUseCase, ModifierCompetenceUseCase modifierCompetenceUseCase, DeleteCompetenceUseCase deleteCompetenceUseCase, ListerAventuriersParCompetenceUseCase listerAventuriersParCompetenceUseCase, AjouterCompetenceAventurierUseCase ajouterCompetenceAventurierUseCase, RetirerCompetenceAventurierUseCase retirerCompetenceAventurierUseCase, ObtenirCompetencesDisponiblesUseCase obtenirCompetencesDisponiblesUseCase) {
         this.creerCompetenceUseCase = creerCompetenceUseCase;
         this.listerCompetencesUseCase = listerCompetencesUseCase;
         this.listerCompetencesAventurierUseCase = listerCompetencesAventurierUseCase;
         this.competenceParIdUseCase = competenceParIdUseCase;
-        this.editCompetenceUseCase = editCompetenceUseCase;
+        this.modifierCompetenceUseCase = modifierCompetenceUseCase;
         this.deleteCompetenceUseCase = deleteCompetenceUseCase;
         this.retirerCompetenceAventurierUseCase = retirerCompetenceAventurierUseCase;
         this.listerAventuriersParCompetenceUseCase = listerAventuriersParCompetenceUseCase;
@@ -70,7 +70,7 @@ public class CompetenceController implements CompetencesApi {
 
     @Override
     public void modifierCompetence(UUID id, Competence competence) {
-        editCompetenceUseCase.execute(id, competence);
+        modifierCompetenceUseCase.execute(id, competence);
     }
 
     @Override
