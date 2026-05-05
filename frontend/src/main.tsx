@@ -11,14 +11,12 @@ import Login from './auth/Login.tsx'
 import Signin from './auth/Signin.tsx'
 import { AuthProvider } from '../AuthContext/AuthProvider.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
-import ListSkill from './Skill/ListSkill.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<App />} />
       <Route path='/aventurier' element={<Adventurer />} />
-      <Route path='/skills' element={<ListSkill />} />
       <Route
         path="/create-adventurer"
         element={
