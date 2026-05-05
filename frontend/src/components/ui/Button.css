@@ -35,7 +35,7 @@
 
 .btn--gold {
   background-color: var(--color-gold);
-  color:            #fff;
+  color: var(--color-parchment);
 }
 .btn--gold:hover:not(:disabled)  { 
   background-color: var(--color-gold-dark); 
@@ -43,7 +43,7 @@
 
 .btn--ruby {
   background-color: var(--color-ruby);
-  color:            #fff;
+  color:            var(--color-parchment);
 }
 .btn--ruby:hover:not(:disabled) { 
   background-color: var(--color-ruby-dark); 
