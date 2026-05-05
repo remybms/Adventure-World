@@ -3,7 +3,6 @@ import './App.css'
 import apiClient from '../AuthContext/apiClient'
 import type { AdventurerType, CustomJwtPayload } from './AdventurerType'
 import { jwtDecode } from 'jwt-decode'
-import Header from './Header'
 
 function App() {
 
@@ -58,7 +57,6 @@ function App() {
 
   return (
     <>
-      <Header />
       <div className='content'>
         <h1>Adventure World</h1>
         

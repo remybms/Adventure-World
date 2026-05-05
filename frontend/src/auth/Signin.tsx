@@ -1,6 +1,7 @@
 import logoDark from '../assets/aw-logo_dark.svg'
-import { useState } from "react"
-import apiClient from "../../AuthContext/apiClient"
+import { useState, useEffect } from 'react'
+import apiClient from '../../AuthContext/apiClient'
+import { useAuth } from '../../AuthContext/AuthContext'
 import { useNavigate } from "react-router-dom"
 import Button from '../components/ui/Button'
 import Input  from '../components/ui/Input'
@@ -16,7 +17,14 @@ export default function SignIn() {
   const [error,           setError]           = useState<string>('')
   const [loading,         setLoading]         = useState<boolean>(false)
 
+  const { token, login } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) {
+      navigate('/adventurers', { replace: true })
+    }
+  }, [token, navigate])
 
   const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -33,8 +41,8 @@ export default function SignIn() {
       // After registration, automatically log in
       const loginResponse = await apiClient.post("/auth/login", { username, password })
       if (loginResponse.status !== 200) throw new Error(`Login status : ${loginResponse.status}`)
-      localStorage.setItem("token", loginResponse.data.token)
-      navigate('/')
+      login(loginResponse.data.token)
+      navigate('/adventurers', { replace: true })
     } catch {
       setError("Une erreur est survenue. Veuillez réessayer.")
     } finally {
