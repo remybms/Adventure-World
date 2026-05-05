@@ -37,15 +37,37 @@ export default function ListSkill() {
     }
 
     return (
-        <>
-            <h1>Catalogue des Compétences</h1>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-                {skills.map((skill) => (
-                    <div key={skill.id} style={{ border: "1px solid #ccc", padding: "15px", width: "300px", borderRadius: "8px" }}>
-                        <h3>{skill.nom}</h3>
-                    </div>
-                ))}
-            </div>
-        </>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            padding: "50px"
+        }}>
+            {skills.map((skill) => (
+                <div
+                    key={skill.id}
+                    style={{
+                        backgroundColor: "#d9d9d9", // Gris du wireframe
+                        border: "1px solid #777",
+                        padding: "30px",
+                        borderRadius: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
+                    }}
+                >
+                    <span style={{
+                        textTransform: "uppercase",
+                        fontWeight: "600",
+                        letterSpacing: "2px",
+                        color: "#000",
+                        fontFamily: "sans-serif"
+                    }}>
+                        {skill.nom}
+                    </span>
+
+                </div>
+            ))}
+        </div>
     );
 }
