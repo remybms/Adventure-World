@@ -50,7 +50,7 @@ export default function Login() {
         <div className="login-avatar" aria-hidden="true" />
 
         <h1 className="login-title">Log In</h1>
-        <p  className="login-subtitle">Access the arena</p>
+        <p  className="login-subtitle">Enter the arena</p>
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
@@ -64,7 +64,7 @@ export default function Login() {
           />
 
           <Input
-            label="Mot de passe"
+            label="Password"
             type="password"
             placeholder="••••••••"
             value={password}
