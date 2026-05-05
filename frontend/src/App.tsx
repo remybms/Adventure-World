@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import apiClient from '../AuthContext/apiClient'
-import type { AdventurerType } from './AdventurerType'
+import type { AdventurerType } from './Types'
 
 function App() {
 
