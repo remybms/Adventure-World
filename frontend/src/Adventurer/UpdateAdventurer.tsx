@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import apiClient from "../../AuthContext/apiClient"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import type { AdventurerType } from "../AdventurerType"
+import type { AdventurerType } from "../Types"
 
 export default function UpdateAdventurer() {
 

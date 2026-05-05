@@ -49,11 +49,11 @@ export default function CreateAdventurer() {
                 </select>
                 <input type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} required />
                 <label>Perception de l'aventurier :</label>
-                <input type="number" min="0" max="100" id="perception" onChange={(e) => setPerception(e.target.value)} required />
+                <input type="number" min="1" max="50" id="perception" onChange={(e) => setPerception(e.target.value)} required />
                 <label>Physique de l'aventurier :</label>
-                <input type="number" min="0" max="100" placeholder="Physique de l'aventurier" onChange={(e) => setPhysique(e.target.value)} required />
+                <input type="number" min="1" max="50" placeholder="Physique de l'aventurier" onChange={(e) => setPhysique(e.target.value)} required />
                 <label>Mental de l'aventurier :</label>
-                <input type="number" min="0" max="100" placeholder="Mental de l'aventurier" onChange={(e) => setMental(e.target.value)} required />
+                <input type="number" min="1" max="50" placeholder="Mental de l'aventurier" onChange={(e) => setMental(e.target.value)} required />
                 <button type="submit">Envoyer</button>
             </form>
         </>

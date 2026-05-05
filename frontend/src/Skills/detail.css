@@ -1,0 +1,78 @@
+.competence{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: var(--color-dark-grey);
+    margin: 2rem;
+}
+
+.head{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    grid-column: span 2;
+    align-items: center;
+}
+
+.description{
+    position: relative;
+    font-size: xx-large;
+    grid-column: span 2;
+    margin: 0.2rem;
+    padding: 2rem;
+    border: 0.2rem solid var(--color-gold);
+    border-radius: var(--radius-md);
+}
+
+.possesseurs,
+.eligibles{
+    position: relative;
+    margin: 0.2rem;
+    padding: 2rem;
+    border: 0.2rem solid var(--color-gold);
+    border-radius: var(--radius-md); 
+}
+
+.prerequisites{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    border: 0.2rem solid var(--color-gold);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+}
+
+.button{
+    margin: 0.5rem;
+}
+
+.createButton{
+    grid-column: span 2;
+    margin-top: 2rem;
+    margin-left: 30rem;
+    margin-right: 30rem;
+}
+
+.labelCompetence{
+    position: absolute;
+    top: -17px;
+    left: 30px;
+    font-size: large;
+    background-color: var(--color-gold-dark);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.labelAventurier{
+    position: absolute;
+    top: -17px;
+    left: 30px;
+    font-size: large;
+    background-color: var(--color-ruby-dark);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+}

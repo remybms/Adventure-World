@@ -48,7 +48,7 @@ export default function Login() {
           <Input
             label="Username"
             type="text"
-            placeholder="bobdu92"
+            placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             onDark

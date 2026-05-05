@@ -1,17 +1,22 @@
 .card{
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem;
   background-color: gray;
-  width: fit-content;
+  width: 100%;
   border-radius: 1rem;
+  text-align: start;
 }
 
 .grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   justify-items: center;
   gap: 1rem;
+}
+
+h1{
+  margin-bottom: 3rem;
 }
 
 .adminButtons{
@@ -21,16 +26,9 @@
   margin-bottom: 1rem;
 }
 
-.header{
-  width: 100vw;
-  display: flex;
-  justify-content: space-around;
-  font-size: x-large;
-  margin-top: 1%;
-  margin-bottom: 1%;
-}
 
 .content{
   margin-left: 10%;
   margin-right: 10%;
+  color: var(--color-dark-grey);
 }
