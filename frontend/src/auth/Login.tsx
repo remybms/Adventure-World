@@ -1,7 +1,8 @@
 import logoDark from '../assets/aw-logo_dark.svg'
-import { useState } from "react"
+import { useState, useEffect } from 'react'
 import apiClient from "../../AuthContext/apiClient"
-import { useNavigate } from "react-router-dom"
+import { useAuth } from '../../AuthContext/AuthContext'
+import { useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import Input  from '../components/ui/Input'
 import './Login.css'
@@ -12,7 +13,14 @@ export default function Login() {
   const [error,    setError]    = useState<string>('')
   const [loading,  setLoading]  = useState<boolean>(false)
 
+  const { token, login } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) {
+      navigate('/adventurers', { replace: true })
+    }
+  }, [token, navigate])
 
   const sendData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,8 +29,8 @@ export default function Login() {
     try {
       const response = await apiClient.post("/auth/login", { username, password })
       if (response.status !== 200) throw new Error(`Response status : ${response.status}`)
-      localStorage.setItem("token", response.data.token)
-      navigate('/')
+      login(response.data.token)
+      navigate('/adventurers', { replace: true })
     } catch {
       setError("Identifiants invalides. Veuillez réessayer.")
     } finally {

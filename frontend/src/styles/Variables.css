@@ -4,6 +4,7 @@
   /* Color palette */
   --color-gold: #D9A441;
   --color-gold-dark: #dd9c24;
+  --color-gold-transparent: rgba(217, 164, 65, 0.12);
   --color-ruby: #B23A3A;
   --color-ruby-dark: #a01d1d;
   --color-parchment: #F4EDE4;

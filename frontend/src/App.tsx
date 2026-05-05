@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import apiClient from '../AuthContext/apiClient'
-import type { AdventurerType } from './Types'
+import type { AdventurerType, CustomJwtPayload } from './Types'
+import { jwtDecode } from 'jwt-decode'
 
 function App() {
 
