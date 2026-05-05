@@ -50,7 +50,9 @@ public class CompetenceMapper {
             competenceDomain.checkCaracteristiquePoints("Mental", competence.getMentalRequis(), aventurier.getMental());
             competenceDomain.checkCaracteristiquePoints("Perception", competence.getPerceptionRequise(), aventurier.getPerception());
             competenceDomain.checkCaracteristiquePoints("Physique", competence.getPhysiqueRequis(), aventurier.getPhysique());
-            competenceDomain.checkClasseRequise(competence.getClasseRequise().toString(), aventurier.getClasse().toString());
+            if(competence.getClasseRequise() != null){
+                competenceDomain.checkClasseRequise(competence.getClasseRequise().toString(), aventurier.getClasse().toString());
+            }
             return true;
         } catch (Exception e) {
             return false;
