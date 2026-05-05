@@ -29,6 +29,9 @@ public class EditCompetenceUseCase {
         competence.setClasseRequise(classeEntity);
         competence.setCompetencesRequises(competencePayload.getCompetencesRequises());
         competence.setNiveauMinimum(competencePayload.getNiveauMinimum());
+        competence.setPhysiqueRequis(competencePayload.getPhysiqueMinimum());
+        competence.setMentalRequis(competencePayload.getMentalMinimum());
+        competence.setPerceptionRequise(competencePayload.getPerceptionMinimum());
         competencesRepository.save(competence);
     }
 }

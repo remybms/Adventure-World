@@ -16,6 +16,9 @@ public class CompetenceMapper {
         competenceResult.setCompetencesRequises(competence.getCompetencesRequises());
         competenceResult.setClasseRequise(competence.getClasseRequise().toString());
         competenceResult.setNiveauMinimum(competence.getNiveauMinimum());
+        competenceResult.setMentalMinimum(competence.getMentalRequis());
+        competenceResult.setPerceptionMinimum(competence.getPerceptionRequise());
+        competenceResult.setPhysiqueMinimum(competenceResult.getPhysiqueMinimum());
         return competenceResult;
     }
 
@@ -28,6 +31,9 @@ public class CompetenceMapper {
         competence.setClasseRequise(classeEntity);
         competence.setCompetencesRequises(competencePayload.getCompetencesRequises());
         competence.setNiveauMinimum(competencePayload.getNiveauMinimum());
+        competence.setPerceptionRequise(competencePayload.getPerceptionMinimum());
+        competence.setMentalRequis(competencePayload.getMentalMinimum());
+        competence.setPhysiqueRequis(competencePayload.getPhysiqueMinimum());
         return competence;
     }
 
