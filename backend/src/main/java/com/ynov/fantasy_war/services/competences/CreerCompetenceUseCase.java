@@ -17,7 +17,9 @@ public class CreerCompetenceUseCase {
 
     public Competence execute(Competence competencePayload){
         log.info("Création d'une compétence");
-        CompetenceEntity competence = CompetenceMapper.fillCompetence(competencePayload);
+        CompetenceEntity competence = new CompetenceEntity();
+        competence.setId(competencePayload.getId());
+        CompetenceMapper.fillCompetence(competencePayload, competence);
         competencesRepository.save(competence);
         return competencePayload;
     }

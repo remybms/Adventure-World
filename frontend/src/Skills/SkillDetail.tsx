@@ -17,6 +17,20 @@ export default function SkillDetail() {
 
     const navigate = useNavigate()
 
+    const deleteSkill = async () => {
+        try{
+            const response = await apiClient.delete(`/api/v1/competences/${id}`)
+            if (response.status != 204){
+                throw new Error(`Response status: ${response.status}`)
+            }
+            const data = await response.data
+            console.log(data)
+            navigate("/skills")
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     useEffect(() => {
         const fetchCompetence = async () => {
             try {
@@ -61,8 +75,8 @@ export default function SkillDetail() {
             <div className="head">
                 <h1>Skill : {skill.nom}</h1>
                 <div>
-                    <Button variant="gold" className="button">Edit skill</Button>
-                    <Button variant="ruby" className="button">Delete skill</Button>
+                    <Button variant="gold" className="button" onClick={() => navigate(`/update-skill?id=${skill.id}`)}>Edit skill</Button>
+                    <Button variant="ruby" className="button" onClick={() => deleteSkill()}>Delete skill</Button>
                 </div>
             </div>
             <div className="description">
@@ -87,7 +101,7 @@ export default function SkillDetail() {
                     <div>{adventurer.nom}</div>
                 ))}
             </div>
-            <Button variant="gold" className="createButton"  onClick={() => navigate("/create-competence")}>Create a competence</Button>
+            <Button variant="gold" className="createButton"  onClick={() => navigate("/create-skill")}>Create a skill</Button>
 
         </div>
     )

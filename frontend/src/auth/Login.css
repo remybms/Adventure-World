@@ -75,3 +75,16 @@ body {
   margin:     0;
   text-align: center;
 }
+
+
+.btm-link {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--color-parchment);
+}
+.login-register-link {
+  font-weight: bolder;
+  cursor: pointer;
+}

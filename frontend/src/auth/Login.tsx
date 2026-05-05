@@ -50,13 +50,13 @@ export default function Login() {
         <div className="login-avatar" aria-hidden="true" />
 
         <h1 className="login-title">Log In</h1>
-        <p  className="login-subtitle">Access the arena</p>
+        <p  className="login-subtitle">Enter the arena</p>
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
             label="Username"
             type="text"
-            placeholder="username"
+            placeholder="Bobdu92"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             onDark
@@ -64,7 +64,7 @@ export default function Login() {
           />
 
           <Input
-            label="Mot de passe"
+            label="Password"
             type="password"
             placeholder="••••••••"
             value={password}
@@ -84,6 +84,14 @@ export default function Login() {
           >
             {loading ? 'Logging in...' : 'Log In'}
           </Button>
+
+          <div className="btm-link">
+            <p>You dont have an account ?</p>
+            <a className="login-register-link" onClick={() => navigate('/register')}>
+                Create one here
+            </a>
+          </div>
+
         </form>
       </div>
     </div>
