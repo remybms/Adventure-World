@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
-import type { CustomJwtPayload } from '../../AdventurerType'
+import type { CustomJwtPayload } from '../../Types'
 import Button from '../ui/Button'
 import './Header.css'
 
