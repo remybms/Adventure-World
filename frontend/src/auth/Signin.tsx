@@ -31,7 +31,7 @@ export default function SignIn() {
     setError('')
 
     if (password !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas.")
+      setError("The passwords do not match.")
       return
     }
 
@@ -44,7 +44,7 @@ export default function SignIn() {
       login(loginResponse.data.token)
       navigate('/adventurers', { replace: true })
     } catch {
-      setError("Une erreur est survenue. Veuillez réessayer.")
+      setError("An error occurred. Please try again.")
     } finally {
       setLoading(false)
     }
@@ -61,8 +61,8 @@ export default function SignIn() {
 
         <div className="login-avatar" aria-hidden="true" />
 
-        <h1 className="login-title">Créer un compte</h1>
-        <p  className="login-subtitle">Rejoins l'arène</p>
+        <h1 className="login-title">Create an account</h1>
+        <p  className="login-subtitle">Join the arena</p>
 
         <form onSubmit={sendData} className="login-form" noValidate>
           <Input
@@ -76,7 +76,7 @@ export default function SignIn() {
           />
 
           <Input
-            label="Mot de passe"
+            label="Password"
             type="password"
             placeholder="••••••••"
             value={password}
@@ -86,7 +86,7 @@ export default function SignIn() {
           />
 
           <Input
-            label="Confirmer le mot de passe"
+            label="Confirm Password"
             type="password"
             placeholder="••••••••"
             value={confirmPassword}
@@ -96,7 +96,7 @@ export default function SignIn() {
           />
 
           <div className="input-wrapper input-wrapper--dark">
-            <label htmlFor="role" className="input-label">Rôle</label>
+            <label htmlFor="role" className="input-label">Role</label>
             <select
               id="role"
               className="input-field select-field"
@@ -118,8 +118,16 @@ export default function SignIn() {
             fullWidth
             disabled={loading}
           >
-            {loading ? 'Création...' : 'Créer un compte'}
+            {loading ? 'Creating...' : 'Create Account'}
           </Button>
+
+          <div className="btm-link">
+            <p>You already have an account ?</p>
+            <a className="login-register-link" onClick={() => navigate('/login')}>
+                Log In here
+            </a>
+          </div>
+
         </form>
       </div>
     </div>
