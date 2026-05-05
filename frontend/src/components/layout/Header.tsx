@@ -45,7 +45,7 @@ export default function Header() {
             onClick={() => navigate(createRoute)}
             title="Create new item"
           >
-          <Icon name="addWhite" size={20} />
+          <Icon name="addWhite" className="btn-icon--lg" size={30} />
             Create
           </Button>
         )}
