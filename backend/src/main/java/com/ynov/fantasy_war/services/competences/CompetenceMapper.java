@@ -40,7 +40,7 @@ public class CompetenceMapper {
             competenceDomain.checkClasseRequise(competence.getClasseRequise().toString(), aventurier.getClasse().toString());
             return true;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 }
