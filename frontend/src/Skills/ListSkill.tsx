@@ -54,7 +54,6 @@ export default function ListSkill() {
                         border: "2px solid #D9A441",
                         padding: "25px 40px",
                         borderRadius: "8px",
-                        height: "183px",
                         display: "flex",
                         alignItems: "center",
                         cursor: "pointer", // Curseur main pour indiquer le clic
