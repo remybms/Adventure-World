@@ -11,6 +11,8 @@ import Login from './auth/Login.tsx'
 import Signin from './auth/Signin.tsx'
 import { AuthProvider } from '../AuthContext/AuthProvider.tsx'
 import UpdateAdventurer from './Adventurer/UpdateAdventurer.tsx'
+import SkillDetail from './Skills/SkillDetail.tsx'
+import CreateSkill from './Skills/CreateSkill.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +37,12 @@ const router = createBrowserRouter(
       />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Signin />} />
+      <Route path='/skills/detail' element={<SkillDetail />} />
+      <Route path='create-skill' element={
+        <PrivateRoute requiredRole='ADMIN'>
+          <CreateSkill />
+        </PrivateRoute>
+      } />
     </>
 
   )

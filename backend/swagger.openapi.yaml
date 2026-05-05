@@ -515,6 +515,12 @@ components:
           type: string
         niveauMinimum:
           type: integer
+        physiqueMinimum:
+          type: integer
+        mentalMinimum:
+          type: integer
+        perceptionMinimum:
+          type: integer
         competencesRequises:
           type: array
           items:

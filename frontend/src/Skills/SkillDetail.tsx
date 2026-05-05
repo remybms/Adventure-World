@@ -1,13 +1,13 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import apiClient from "../../AuthContext/apiClient"
 import { useEffect, useState } from "react";
-import { type AventuriersOnCompetence, type CompetenceType } from "../Types";
+import { type AventuriersOnCompetence, type SkillType } from "../Types";
 import "./detail.css"
 import Button from "../components/ui/Button";
 
-export default function CompetenceDetail() {
+export default function SkillDetail() {
 
-    const [competence, setCompetence] = useState<CompetenceType>()
+    const [skill, setSkill] = useState<SkillType>()
     const [adventurers, setAdventurers] = useState<AventuriersOnCompetence>()
     const [error, setError] = useState<unknown>()
 
@@ -25,7 +25,7 @@ export default function CompetenceDetail() {
                     throw new Error(`Response status: ${response.status}`);
                 }
                 const data = await response.data
-                setCompetence(data)
+                setSkill(data)
             } catch (e) {
                 setError(e)
             }
@@ -48,7 +48,7 @@ export default function CompetenceDetail() {
         fetchAventuriers()
     }, [id])
 
-    if (!adventurers || !competence) {
+    if (!adventurers || !skill) {
         return <div>Loading...</div>
     }
 
@@ -59,7 +59,7 @@ export default function CompetenceDetail() {
     return (
         <div className="competence">
             <div className="head">
-                <h1>Skill : {competence.nom}</h1>
+                <h1>Skill : {skill.nom}</h1>
                 <div>
                     <Button variant="gold" className="button">Edit skill</Button>
                     <Button variant="ruby" className="button">Delete skill</Button>
@@ -67,13 +67,13 @@ export default function CompetenceDetail() {
             </div>
             <div className="description">
                 <span className="labelCompetence">Description</span>
-                {competence.description}
+                {skill.description}
             </div>
             <div className="prerequisites">
                 <span className="labelCompetence">Prerequisites</span>
-                {competence.classeRequise && <p>Required class : {competence.classeRequise}</p>}
-                {competence.niveauMinimum && <p>Minimum level : {competence.niveauMinimum}</p>}
-                {competence.competencesRequises && competence.competencesRequises.length > 0 && (<p>Required skills: {competence.competencesRequises.join(', ')}</p>)}
+                {skill.classeRequise && <p>Required class : {skill.classeRequise}</p>}
+                {skill.niveauMinimum && <p>Minimum level : {skill.niveauMinimum}</p>}
+                {skill.competencesRequises && skill.competencesRequises.length > 0 && (<p>Required skills: {skill.competencesRequises.join(', ')}</p>)}
             </div>
             <div className="possesseurs">
                 <span className="labelAventurier">Owners</span>

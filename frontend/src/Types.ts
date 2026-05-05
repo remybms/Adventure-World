@@ -11,7 +11,7 @@ export interface AdventurerType {
     niveau: number
 }
 
-export interface CompetenceType {
+export interface SkillType {
   id: string,
   nom: string,
   description: string,
