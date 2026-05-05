@@ -20,7 +20,7 @@ export interface SkillType {
   competencesRequises : Array<string> | null
 }
 
-export interface AventuriersOnCompetence{
+export interface AdventurersOnSkill{
   possesseurs: Array<AdventurerType>,
   eligibles: Array<AdventurerType>
 }

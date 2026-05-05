@@ -10,7 +10,7 @@ interface SidebarProps {
   role:     string
 }
 
-export default function Sidebar({ username }: SidebarProps) {
+export default function Sidebar({ username, role }: SidebarProps) {
   const navigate = useNavigate()
   const { logout } = useAuth()
 
@@ -72,8 +72,7 @@ export default function Sidebar({ username }: SidebarProps) {
           </div>
           <div className="sidebar-user-info">
             <span className="sidebar-username">{username}</span>
-            {/* <span className="sidebar-role">{role}</span> */}
-            <span className="sidebar-role">user_role</span>
+            <span className="sidebar-role">{role}</span>
           </div>
         </div>
 

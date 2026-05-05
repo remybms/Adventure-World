@@ -1,10 +1,10 @@
 package com.ynov.fantasy_war.services.users.jwt;
 
-import com.ynov.fantasy_war.infra.bdd.UsersRepository;
+import com.ynov.fantasy_war.infra.bdd.UtilisateursRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
-import com.ynov.fantasy_war.infra.bdd.entity.AppUser;
+import com.ynov.fantasy_war.infra.bdd.entity.UtilisateurEntity;
 
 import java.util.List;
 
@@ -24,14 +24,14 @@ import java.util.List;
 @Service
 public class DbUserDetailsService implements UserDetailsService {
 
-    private final UsersRepository repository;
+    private final UtilisateursRepository repository;
 
     /**
      * Injection du repository via constructeur.
      *
      * @param repository accès DB des utilisateurs
      */
-    public DbUserDetailsService(UsersRepository repository) {
+    public DbUserDetailsService(UtilisateursRepository repository) {
         this.repository = repository;
     }
 
@@ -47,7 +47,7 @@ public class DbUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser user = repository.findByUsername(username)
+        UtilisateurEntity user = repository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
         // On transforme notre rôle texte ("ROLE_USER") en GrantedAuthority pour Spring Security

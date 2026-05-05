@@ -1,19 +1,19 @@
 package com.ynov.fantasy_war.infra.bdd;
 
-import com.ynov.fantasy_war.infra.bdd.entity.AppUser;
+import com.ynov.fantasy_war.infra.bdd.entity.UtilisateurEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 
-public interface UsersRepository extends JpaRepository<AppUser, Long> {
+public interface UtilisateursRepository extends JpaRepository<UtilisateurEntity, Long> {
     /**
      * Recherche un utilisateur par username.
      *
      * @param username le nom d'utilisateur
      * @return un Optional (vide si non trouvé)
      */
-    Optional<AppUser> findByUsername(String username);
+    Optional<UtilisateurEntity> findByUsername(String username);
 
     /**
      * Vérifie si un utilisateur existe déjà pour ce username.
