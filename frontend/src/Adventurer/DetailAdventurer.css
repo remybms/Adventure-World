@@ -1,0 +1,56 @@
+h1{
+    color: var(--color-dark-grey);
+    text-align: start;
+    font-size: xxx-large;
+}
+
+.description{
+    position: relative;
+    font-size: xx-large;
+    margin: 0.2rem;
+    padding: 2rem;
+    border: 0.2rem solid var(--color-gold);
+    border-radius: var(--radius-md);
+}
+
+.details{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-size: x-large;
+    margin: 0.2rem;
+    padding: 2rem;
+    border: 0.2rem solid var(--color-gold);
+    border-radius: var(--radius-md);
+}
+
+.label{
+    position: absolute;
+    top: -17px;
+    left: 30px;
+    font-size: large;
+    background-color: var(--color-ruby-dark);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.pageContent{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.adminButtons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.head{
+    display: flex;
+}
+
+.level{
+    grid-column: span 2;
+}

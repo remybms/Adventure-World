@@ -9,6 +9,7 @@ import com.ynov.fantasy_war.infra.bdd.CompetencesRepository;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceAventurier;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceEntity;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class RetirerCompetenceAventurierUseCase {
     private final AventurierRepository aventurierRepository;
     private final CompetenceDomain competenceDomain;
 
+    @Transactional
     public void execute(UUID aventurierId, UUID competenceId) {
         // check if the eventurer exists
         if (!aventurierRepository.existsById(aventurierId)) {
