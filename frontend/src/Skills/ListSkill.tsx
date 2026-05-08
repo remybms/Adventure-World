@@ -65,7 +65,7 @@ export default function ListSkill() {
                     onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                 >
                     <span style={{
-                        fontFamily: "'Cinzel', serif",
+                        fontFamily: "'Roboto', serif",
                         textTransform: "uppercase",
                         fontWeight: "700",
                         color: "#414141",

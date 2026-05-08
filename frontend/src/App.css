@@ -1,25 +1,29 @@
-.card{
+.card {
   display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  background-color: gray;
+  background-color: var(--color-parchment);
   width: 100%;
-  border-radius: 1rem;
+  height: 10rem;
+  border-radius: var(--radius-md);
+  border: 0.15rem solid var(--color-ruby);
   text-align: start;
+  align-items: center;
+  margin-bottom: 2rem;
+  font-family: 'Roboto';
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
 }
 
-.grid{
+.name{
+  padding: 2rem;
+}
+
+.grid {
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  gap: 1rem;
+  min-height: 70vh;
 }
 
-h1{
-  margin-bottom: 3rem;
-}
-
-.adminButtons{
+.adminButtons {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -27,8 +31,6 @@ h1{
 }
 
 
-.content{
-  margin-left: 10%;
-  margin-right: 10%;
+.content {
   color: var(--color-dark-grey);
 }
