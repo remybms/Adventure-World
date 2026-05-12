@@ -42,8 +42,8 @@ Ce projet consiste à enrichir une application de gestion d'aventuriers avec un 
 - [ ] etc.
 
 ## Documentation
-- Frontend (lien à mettre)
-- Backend (lien à mettre)
+- [README Frontend](./frontend/README.md)
+- [README Backend](./backend/README.md)
 
 ## 👥 Équipe
 - Etienne LEMEE
