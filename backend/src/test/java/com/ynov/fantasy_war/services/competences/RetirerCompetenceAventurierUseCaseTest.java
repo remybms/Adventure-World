@@ -2,6 +2,7 @@ package com.ynov.fantasy_war.services.competences;
 
 import com.ynov.fantasy_war.domain.ConflictException;
 import com.ynov.fantasy_war.domain.NotFoundException;
+import com.ynov.fantasy_war.domain.competence.CompetenceDomain;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.CompetenceAventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.CompetencesRepository;
@@ -22,6 +23,7 @@ class RetirerCompetenceAventurierUseCaseTest {
     private CompetenceAventurierRepository competenceAventurierRepository;
     private CompetencesRepository competencesRepository;
     private AventurierRepository aventurierRepository;
+    private CompetenceDomain competenceDomain;
     private RetirerCompetenceAventurierUseCase useCase;
 
     @BeforeEach
@@ -29,7 +31,8 @@ class RetirerCompetenceAventurierUseCaseTest {
         competenceAventurierRepository = mock(CompetenceAventurierRepository.class);
         competencesRepository = mock(CompetencesRepository.class);
         aventurierRepository = mock(AventurierRepository.class);
-        useCase = new RetirerCompetenceAventurierUseCase(competenceAventurierRepository, competencesRepository, aventurierRepository);
+        competenceDomain = mock(CompetenceDomain.class);
+        useCase = new RetirerCompetenceAventurierUseCase(competenceAventurierRepository, competencesRepository, aventurierRepository, competenceDomain);
     }
 
     @Test
@@ -56,6 +59,10 @@ class RetirerCompetenceAventurierUseCaseTest {
         otherCompetence.setNom("Combo");
         otherCompetence.setCompetencesRequises(List.of(competenceId));
         when(competencesRepository.findById(otherId)).thenReturn(Optional.of(otherCompetence));
+
+        doThrow(new ConflictException("Combo"))
+                .when(competenceDomain)
+                .checkRetraitCompetence(eq(competenceId), anyList());
 
         ConflictException ex = assertThrows(ConflictException.class, () -> useCase.execute(adventurerId, competenceId));
         assertTrue(ex.getMessage().contains("Combo"));

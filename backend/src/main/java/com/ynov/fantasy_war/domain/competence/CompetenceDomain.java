@@ -24,74 +24,22 @@ public class CompetenceDomain {
         }
     }
 
-    public void checkCompetencesRequises(List<UUID> competencesRequises, List<UUID> competencesAventurier){
-        if (competencesRequises == null || competencesRequises.isEmpty()){
+    public void checkCompetencesRequises(List<UUID> competencesRequises, List<UUID> competencesAventurier) {
+        if (competencesRequises == null || competencesRequises.isEmpty()) {
             return;
         }
-        if (competencesAventurier == null || competencesAventurier.isEmpty()){
+        if (competencesAventurier == null || competencesAventurier.isEmpty()) {
             throw new IllegalKnownCompetenceException();
         }
         for (UUID required : competencesRequises) {
-            if (!competencesAventurier.contains(required)){
+            if (!competencesAventurier.contains(required)) {
                 throw new IllegalKnownCompetenceException();
             }
+        }
     }
     public void checkCaracteristiquePoints(String caracteristique, int requiredPoints, int aventurierPoints){
         if (requiredPoints > aventurierPoints){
             throw new IllegalCaracteristiquePointsException(caracteristique, requiredPoints);
-        }
-    }
-
-    public void checkModificationPrerequis(
-            String nouvelleClasseRequise,
-            Integer nouveauNiveauMinimum,
-            Integer nouveauMental,
-            Integer nouvellePerception,
-            Integer nouveauPhysique,
-            List<AventurierDto> aventuriersPossedantCompetence
-    ) {
-        List<UUID> aventuriersInvalides = new ArrayList<>();
-
-        for (AventurierDto aventurier : aventuriersPossedantCompetence) {
-
-            try {
-                if (nouvelleClasseRequise != null) {
-                    checkClasseRequise(nouvelleClasseRequise, aventurier.getClasse().toString());
-                }
-
-                if (nouveauNiveauMinimum != null) {
-                    checkNiveauRequis(nouveauNiveauMinimum, aventurier.getNiveau());
-                }
-
-                if (nouveauMental != null) {
-                    checkCaracteristiquePoints(
-                            "mental",
-                            nouveauMental,
-                            aventurier.getMental()
-                    );
-                }
-                if (nouvellePerception != null) {
-                    checkCaracteristiquePoints(
-                            "mental",
-                            nouvellePerception,
-                            aventurier.getPerception()
-                    );
-                }
-                if (nouveauPhysique != null) {
-                    checkCaracteristiquePoints(
-                            "mental",
-                            nouveauPhysique,
-                            aventurier.getPhysique()
-                    );
-                }
-
-            } catch (RuntimeException e) {
-                aventuriersInvalides.add(aventurier.getId());
-            }
-        }
-
-        if (!aventuriersInvalides.isEmpty()) {
-            throw new IllegalCompetenceModificationException(aventuriersInvalides);
         }
     }
 
