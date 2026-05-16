@@ -42,7 +42,6 @@ export default function CreateSkill() {
 
     return (
         <>
-            <h1>Create a skill !</h1>
             <form className="form" onSubmit={sendData}>
                 <Input
                     label="Skill name"

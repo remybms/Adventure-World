@@ -3,7 +3,7 @@ import apiClient from "../../AuthContext/apiClient";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-interface Competence {
+interface Skill {
   id: string;
   nom: string;
   description?: string;
@@ -15,7 +15,7 @@ interface Competence {
   competencesRequises?: string[];
 }
 
-interface AventurierStats {
+interface AdventurerStats {
   niveau: number;
   physique: number;
   mental: number;
@@ -24,39 +24,64 @@ interface AventurierStats {
 }
 
 interface CompetencesDisponiblesResult {
-  disponibles: Competence[];
-  bloquees: Competence[];
+  disponibles: Skill[];
+  bloquees: Skill[];
 }
 
 interface SkillsSectionProps {
-  aventurierId: string;
+  adventurerId: string;
 }
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
-function SkillBadge({ competence }: { competence: Competence }) {
+function SkillBadge({ skill, adventurerId, onRefresh }: { skill: Skill, adventurerId: string, onRefresh: () => void }) {
+
+  const removeSkill = async (skillId: string) => {
+    try{
+      const response = await apiClient.delete(`/api/v1/aventuriers/${adventurerId}/competences/${skillId}`)
+      if (response.status != 204){
+        throw new Error(`Response status : ${response.status}`)
+      }
+      const data = response.data
+      console.log(data)
+      onRefresh()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <div className="skill-badge" title={competence.description}>
-      <span className="skill-name">{competence.nom}</span>
-      {competence.classeRequise && (
-        <span className="skill-class">{competence.classeRequise}</span>
-      )}
-    </div>
+    <button className="skill-badge" title={skill.description} onClick={() => removeSkill(skill.id)}>
+      <span className="skill-name">{skill.nom}</span>
+      <span>-</span>
+    </button>
   );
 }
 
-function EligibleBadge({ competence }: { competence: Competence }) {
+function EligibleBadge({ skill, adventurerId, onRefresh }: { skill: Skill, adventurerId: string, onRefresh: () => void }) {
+  const addSkill = async (skillId: string) => {
+    try{
+      const response = await apiClient.post(`/api/v1/aventuriers/${adventurerId}/competences/${skillId}`)
+      if (response.status != 201){
+        throw new Error(`Response status : ${response.status}`)
+      }
+      const data = response.data
+      console.log(data)
+      onRefresh()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <div className="skill-badge eligible" title={competence.description}>
-      <span className="skill-name">{competence.nom}</span>
-      {competence.niveauMinimum && (
-        <span className="skill-class">Niv. {competence.niveauMinimum}</span>
-      )}
-    </div>
+    <button className="skill-badge eligible" title={skill.description} onClick={() => addSkill(skill.id)}>
+      <span className="skill-name">{skill.nom}</span>
+      <span>+</span>
+    </button>
   );
 }
 
-function BlockedBadge({ competence, stats }: { competence: Competence; stats: AventurierStats | null }) {
+function BlockedBadge({ competence, stats }: { competence: Skill; stats: AdventurerStats | null }) {
   const [expanded, setExpanded] = useState(false);
 
   const isBlocked = (current: number | string | undefined, required: number | string | undefined) => {
@@ -76,7 +101,7 @@ function BlockedBadge({ competence, stats }: { competence: Competence; stats: Av
   ];
 
   return (
-    <div
+    <button
       className={`skill-badge blocked ${expanded ? 'active' : ''}`}
       onClick={() => setExpanded((v) => !v)}
     >
@@ -99,7 +124,7 @@ function BlockedBadge({ competence, stats }: { competence: Competence; stats: Av
           {competence.description && <div className="popup-desc">{competence.description}</div>}
         </div>
       )}
-    </div>
+    </button>
   );
 }
 
@@ -128,11 +153,11 @@ function SkillBlock({
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export default function SkillsSection({ aventurierId }: SkillsSectionProps) {
-  const [acquises, setAcquises] = useState<Competence[]>([]);
-  const [disponibles, setDisponibles] = useState<Competence[]>([]);
-  const [bloquees, setBloquees] = useState<Competence[]>([]);
-  const [stats, setStats] = useState<AventurierStats | null>(null);
+export default function SkillsSection({ adventurerId }: SkillsSectionProps) {
+  const [acquises, setAcquises] = useState<Skill[]>([]);
+  const [disponibles, setDisponibles] = useState<Skill[]>([]);
+  const [bloquees, setBloquees] = useState<Skill[]>([]);
+  const [stats, setStats] = useState<AdventurerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -141,9 +166,9 @@ export default function SkillsSection({ aventurierId }: SkillsSectionProps) {
     setError(null);
 
     Promise.all([
-      apiClient.get<Competence[]>(`/api/v1/aventuriers/${aventurierId}/competences`),
-      apiClient.get<CompetencesDisponiblesResult>(`/api/v1/aventuriers/${aventurierId}/competences/disponibles`),
-      apiClient.get<AventurierStats>(`/api/v1/aventuriers/${aventurierId}`)
+      apiClient.get<Skill[]>(`/api/v1/aventuriers/${adventurerId}/competences`),
+      apiClient.get<CompetencesDisponiblesResult>(`/api/v1/aventuriers/${adventurerId}/competences/disponibles`),
+      apiClient.get<AdventurerStats>(`/api/v1/aventuriers/${adventurerId}`)
     ])
       .then(([acqRes, dispoRes, statsRes]) => {
         setAcquises(acqRes.data ?? []);
@@ -153,7 +178,7 @@ export default function SkillsSection({ aventurierId }: SkillsSectionProps) {
       })
       .catch(() => setError("Unable to load skills."))
       .finally(() => setLoading(false));
-  }, [aventurierId]);
+  }, [adventurerId]);
 
   useEffect(() => {
     fetchAll();
@@ -228,6 +253,7 @@ export default function SkillsSection({ aventurierId }: SkillsSectionProps) {
             color: #4a3a10; 
             cursor: pointer; 
             transition: all 0.2s; 
+            font-family: 'Cinzel', 'Palatino Linotype', serif;
         }
 
         .skill-badge:hover { 
@@ -283,11 +309,11 @@ export default function SkillsSection({ aventurierId }: SkillsSectionProps) {
         {!loading && (
           <>
             <SkillBlock title="Aquired skills" labelClass="labelCompetence" isEmpty={acquises.length === 0}>
-              {acquises.map((c) => <SkillBadge key={c.id} competence={c} />)}
+              {acquises.map((c) => <SkillBadge key={c.id} skill={c} adventurerId={adventurerId} onRefresh={fetchAll} />)}
             </SkillBlock>
 
             <SkillBlock title="Eligible skills" labelClass="labelCompetence" isEmpty={disponibles.length === 0}>
-              {disponibles.map((c) => <EligibleBadge key={c.id} competence={c} />)}
+              {disponibles.map((c) => <EligibleBadge key={c.id} skill={c} adventurerId={adventurerId} onRefresh={fetchAll} />)}
             </SkillBlock>
 
             <SkillBlock title="Blocked skills" labelClass="labelAventurier" isEmpty={bloquees.length === 0}>

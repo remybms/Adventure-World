@@ -1,0 +1,10 @@
+.formAdventurer{
+    margin: 0 1rem;
+    background-color: var(--color-gold);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+}
+
+.submitButton{
+    margin: 1rem 0 0 0;
+}

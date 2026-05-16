@@ -1,5 +1,6 @@
 package com.ynov.fantasy_war.services.competences;
 
+import com.ynov.fantasy_war.domain.ConflictException;
 import com.ynov.fantasy_war.domain.NotFoundException;
 import com.ynov.fantasy_war.domain.competence.CompetenceDomain;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
@@ -35,6 +36,16 @@ public class AjouterCompetenceAventurierUseCase {
         if (!ok) {
             throw new com.ynov.fantasy_war.domain.RequeteInvalideException("L'aventurier ne satisfait pas les prérequis pour cette compétence"){};
         }
+        boolean dejaLiee = competenceAventurierRepository
+                .findByIdAventurierAndIdCompetence(idAventurier, idCompetence)
+                .isPresent();
+
+        if (dejaLiee) {
+            throw new ConflictException(
+                    "L'aventurier possède déjà cette compétence"
+            );
+        }
+
 
         CompetenceAventurier competenceAventurier = new CompetenceAventurier();
         competenceAventurier.setIdCompetence(competence.getId());

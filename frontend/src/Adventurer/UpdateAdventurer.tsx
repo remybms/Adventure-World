@@ -2,16 +2,19 @@ import { useState, useEffect } from "react"
 import apiClient from "../../AuthContext/apiClient"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import type { AdventurerType } from "../Types"
+import Input from "../components/ui/Input"
+import Button from "../components/ui/Button"
+import "./CreateAdventurer.css"
 
 export default function UpdateAdventurer() {
 
     const [name, setName] = useState<string>()
-    const [classe, setClasse] = useState<string>()
+    const [adventurerClass, setClass] = useState<string>()
     const [description, setDescription] = useState<string>()
     const [perception, setPerception] = useState<number>()
-    const [physique, setPhysique] = useState<number>()
+    const [physical, setPhysical] = useState<number>()
     const [mental, setMental] = useState<number>()
-    const [niveau, setNiveau] = useState<number>()
+    const [level, setLevel] = useState<number>()
     const [searchedAdventurer, setSearchedAdventurer] = useState<AdventurerType>()
     const [error, setError] = useState<unknown>()
 
@@ -25,12 +28,12 @@ export default function UpdateAdventurer() {
         try {
             const response = await apiClient.put(`/api/v1/aventuriers/${id}`, {
                 nom: name,
-                classe: classe,
+                classe: adventurerClass,
                 description: description,
                 perception: perception,
-                physique: physique,
+                physique: physical,
                 mental: mental,
-                niveau: niveau
+                niveau: level
             })
             const data = await response.data
             console.log(data)
@@ -49,12 +52,12 @@ export default function UpdateAdventurer() {
                 }
                 const data = await response.data
                 setName(data.nom)
-                setClasse(data.classe)
+                setClass(data.classe)
                 setDescription(data.description)
                 setMental(data.mental)
                 setPerception(data.perception)
-                setPhysique(data.physique)
-                setNiveau(data.niveau)
+                setPhysical(data.physique)
+                setLevel(data.niveau)
                 setSearchedAdventurer(data)
             } catch (error) {
                 setError(error)
@@ -77,25 +80,25 @@ export default function UpdateAdventurer() {
     return (
         <>
             <h1>Modification de l'aventurier : {name}</h1>
-            <form onSubmit={sendData}>
-                <input type="text" placeholder="Nom de l'aventurier" value={name} onChange={(e) => setName(e.target.value)} required />
-                <select name="classe" id="classe-select" value={classe} onChange={(e) => setClasse(e.target.value)} required >
-                    <option value="">--Veuillez choisir une option--</option>
-                    <option value="MAITRE_D_ARMES">Maitre d'Armes</option>
-                    <option value="ECLAIREUR">Éclaireur</option>
-                    <option value="ARCANISTE">Arcaniste</option>
-                    <option value="GARDIEN">Gardien</option>
-                    <option value="PREDICATEUR">Prédicateur</option>
-                    <option value="GUERRIER">Guerrier</option>
-                </select>
-                <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-                <label>Perception de l'aventurier :</label>
-                <input type="number" min="1" max="50" id="perception" value={perception} onChange={(e) => setPerception(Number(e.target.value))} required />
-                <label>Physique de l'aventurier :</label>
-                <input type="number" min="1" max="50" placeholder="Physique de l'aventurier" value={physique} onChange={(e) => setPhysique(Number(e.target.value))} required />
-                <label>Mental de l'aventurier :</label>
-                <input type="number" min="1" max="50" placeholder="Mental de l'aventurier" value={mental} onChange={(e) => setMental(Number(e.target.value))} required />
-                <button type="submit">Envoyer</button>
+            <form onSubmit={sendData} className="formAdventurer">
+                <Input type="text" placeholder="Adventurer name" label="Adventurer name" value={name} onDark onChange={(e) => setName(e.target.value)} required />
+                <div className="input-wrapper input-wrapper--dark">
+                    <label htmlFor="class-select" className="input-label">Class</label>
+                    <select name="class" id="class-select" className="input-field select-field" value={adventurerClass} onChange={(e) => setClass(e.target.value)} required>
+                        <option value="">--Select an option--</option>
+                        <option value="GUERRIER">Warrior</option>
+                        <option value="ECLAIREUR">Scout</option>
+                        <option value="MAITRE_D_ARMES">Weapons Master</option>
+                        <option value="ARCANISTE">Arcanist</option>
+                        <option value="GARDIEN">Guardian</option>
+                        <option value="PREDICATEUR">Preacher</option>
+                    </select>
+                </div>
+                <Input type="text" placeholder="Description" label="Description" value={description} onDark onChange={(e) => setDescription(e.target.value)} required />
+                <Input type="number" min="1" max="50" id="perception" value={perception} onDark placeholder="Adventurer perception" label="Perception" onChange={(e) => setPerception(Number(e.target.value))} required />
+                <Input type="number" min="1" max="50" placeholder="Adventurer Physical" value={physical} onDark label="Physical" onChange={(e) => setPhysical(Number(e.target.value))} required />
+                <Input type="number" min="1" max="50" placeholder="Adventurer mental" value={physical} onDark label="Mental" onChange={(e) => setMental(Number(e.target.value))} required />
+                <Button type="submit" className="submitButton" variant="ruby">Envoyer</Button>
             </form>
         </>
     )

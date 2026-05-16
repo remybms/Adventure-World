@@ -1,17 +1,21 @@
 package com.ynov.fantasy_war.services.competences;
 
 import com.ynov.fantasy_war.domain.NotFoundException;
+import com.ynov.fantasy_war.domain.competence.CompetenceDomain;
 import com.ynov.fantasy_war.infra.bdd.CompetencesRepository;
 import com.ynov.fantasy_war.infra.bdd.CompetenceAventurierRepository;
 import com.ynov.fantasy_war.infra.bdd.AventurierRepository;
 import com.ynov.fantasy_war.domain.ConflictException;
 import com.ynov.fantasy_war.domain.competence.CompetenceDomain;
 import com.ynov.fantasy_war.infra.bdd.entity.CompetenceEntity;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventurierDto;
+import com.ynov.fantasy_war.infrastructure.web.openapi.dto.AventuriersParCompetenceResponse;
 import com.ynov.fantasy_war.infrastructure.web.openapi.dto.Competence;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor

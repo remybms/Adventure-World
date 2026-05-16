@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import apiClient from '../AuthContext/apiClient'
 import type { AdventurerType } from './Types'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
 
   const [adventurers, setAdventurers] = useState<AdventurerType[]>()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,18 +33,17 @@ function App() {
   return (
     <>
       <div className='content'>
-        <h1>Welcome to Adventure World !</h1>
-
         <div className='grid'>
           {adventurers.map((adventurer) => (
-          <div className='card'>
-            <a href={`/adventurers/detail?id=${adventurer.id}`}>
-              <h2>{adventurer.nom}</h2>
-            </a>
-          </div>
-        ))}
+            <div className='card'
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.01)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+              onClick={() => navigate(`/adventurers/detail?id=${adventurer.id}`)}>
+              <h2 className='name'>{adventurer.nom}</h2>
+            </div>
+          ))}
         </div>
-        
+
       </div>
 
     </>

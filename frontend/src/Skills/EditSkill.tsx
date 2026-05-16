@@ -81,7 +81,6 @@ export default function EditSkill() {
 
     return (
         <>
-            <h1>Edit a skill !</h1>
             <form className="form" onSubmit={sendData}>
                 <Input
                     label="Competence name"
