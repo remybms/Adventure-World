@@ -53,6 +53,16 @@
 			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security-oauth2-client</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation-test</artifactId>
@@ -116,7 +126,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/swagger.openapi.yaml</inputSpec>
+							<inputSpec>${project.basedir}/../documentation/contrat.openapi.yaml</inputSpec>
 							<output>${openapi-generator.output}</output>
 							<generatorName>spring</generatorName>
 							<modelPackage>${openapi-generator.modelPackage}</modelPackage>

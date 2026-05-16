@@ -1,7 +1,6 @@
 package com.ynov.fantasy_war.infra.api;
 
-import com.ynov.fantasy_war.domain.IllegalNiveauCreationException;
-import com.ynov.fantasy_war.domain.IllegalNiveauModificationException;
+import com.ynov.fantasy_war.domain.ConflictException;
 import com.ynov.fantasy_war.domain.NotFoundException;
 import com.ynov.fantasy_war.domain.RequeteInvalideException;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +49,12 @@ public class ApiExceptionHandler {
     public ProblemDetail handleNotFoundException(
             NotFoundException ex) {
         return buildProblemDetail(ex, HttpStatus.NOT_FOUND, "Données non trouvée invalide");
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ProblemDetail handleConflictException(
+            ConflictException ex) {
+        return buildProblemDetail(ex, HttpStatus.CONFLICT, "Conflit détecté");
     }
 
     private static @NonNull ProblemDetail buildProblemDetail(Exception ex, HttpStatus httpStatus, String title) {

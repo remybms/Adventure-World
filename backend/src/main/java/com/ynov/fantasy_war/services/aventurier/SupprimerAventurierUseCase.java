@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class DeleteAdventurerUseCase {
+public class SupprimerAventurierUseCase {
 
     private final AventurierRepository aventurierRepository;
 
