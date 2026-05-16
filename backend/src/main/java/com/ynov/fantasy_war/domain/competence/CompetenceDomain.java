@@ -22,11 +22,15 @@ public class CompetenceDomain {
     }
 
     public void checkCompetencesRequises(List<UUID> competencesRequises, List<UUID> competencesAventurier){
-        for (int i = 0; i < competencesAventurier.size(); i++) {
-            for (int j = 0; j < competencesRequises.size(); j++) {
-                if (competencesAventurier.get(i) != competencesRequises.get(j)){
-                    throw new IllegalKnownCompetenceException();
-                }
+        if (competencesRequises == null || competencesRequises.isEmpty()){
+            return;
+        }
+        if (competencesAventurier == null || competencesAventurier.isEmpty()){
+            throw new IllegalKnownCompetenceException();
+        }
+        for (UUID required : competencesRequises) {
+            if (!competencesAventurier.contains(required)){
+                throw new IllegalKnownCompetenceException();
             }
         }
     }

@@ -31,7 +31,10 @@ public class AjouterCompetenceAventurierUseCase {
         CompetenceEntity competence = competencesRepository.findById(idCompetence)
                 .orElseThrow(() -> new NotFoundException("Compétence", idCompetence));
 
-        CompetenceMapper.checkCompetence(competenceDomain, competence, aventurier);
+        boolean ok = CompetenceMapper.checkCompetence(competenceDomain, competence, aventurier);
+        if (!ok) {
+            throw new com.ynov.fantasy_war.domain.RequeteInvalideException("L'aventurier ne satisfait pas les prérequis pour cette compétence"){};
+        }
 
         CompetenceAventurier competenceAventurier = new CompetenceAventurier();
         competenceAventurier.setIdCompetence(competence.getId());
