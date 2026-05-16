@@ -25,10 +25,15 @@ public class CompetenceDomain {
     }
 
     public void checkCompetencesRequises(List<UUID> competencesRequises, List<UUID> competencesAventurier){
-            for (int i = 0; i < competencesRequises.size(); i++) {
-                if (!competencesAventurier.contains(competencesRequises.get(i))){
-                    throw new IllegalKnownCompetenceException();
-                }
+        if (competencesRequises == null || competencesRequises.isEmpty()){
+            return;
+        }
+        if (competencesAventurier == null || competencesAventurier.isEmpty()){
+            throw new IllegalKnownCompetenceException();
+        }
+        for (UUID required : competencesRequises) {
+            if (!competencesAventurier.contains(required)){
+                throw new IllegalKnownCompetenceException();
             }
     }
     public void checkCaracteristiquePoints(String caracteristique, int requiredPoints, int aventurierPoints){
